@@ -1,12 +1,13 @@
-// components/footer.js
+// components/Footer.js
+
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-10 mt-16">
       <div className="container mx-auto px-4 text-center">
-        {/* Instagram Feed */}
+        <h2 className="text-xl font-semibold mb-4">Follow me on Instagram</h2>
         <iframe
           src="https://snapwidget.com/embed/1101348"
-          className="snapwidget-widget mx-auto"
+          className="mx-auto"
           allowTransparency="true"
           frameBorder="0"
           scrolling="no"
@@ -16,7 +17,7 @@ export default function Footer() {
             width: "480px",
             height: "160px",
           }}
-          title="Posts from Instagram"
+          title="Instagram Feed"
         ></iframe>
       </div>
     </footer>
