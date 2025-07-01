@@ -91,7 +91,7 @@ export default function Home() {
             <p className="text-white text-lg md:text-xl mb-8 mt-4">
               Elevate your brand with professional design that captures your vision. 
               From logos to complete brand identities, I create custom designs 
-              that make your business stand out in today's competitive market.
+              that make your business stand out in todays competitive market.
             </p>
             
             <Link 
