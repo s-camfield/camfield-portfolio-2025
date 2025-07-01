@@ -1,103 +1,219 @@
-import Image from "next/image";
+// app/page.js
+import Image from 'next/image';
+import Link from 'next/link';
+import Navigation from '../components/Navigation';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="relative min-h-screen">
+      {/* Navigation */}
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative h-screen">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/field-hero-bk.png"
+            alt="Camfield Designs Hero"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+      
+      {/* Scrolling Text Section */}
+      <section className="bg-[#26bcab] py-8 overflow-hidden">
+        <div className="relative flex overflow-x-hidden">
+          <div className="animate-marquee whitespace-nowrap py-2">
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Web Designer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Videography</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Animation</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Video Editing</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Content Creation</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Developer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Photography</span>
+          </div>
+          
+          <div className="absolute top-0 animate-marquee2 whitespace-nowrap py-2">
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Web Designer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Videography</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Animation</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Video Editing</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Content Creation</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Developer</span>
+            <span className="text-white text-xl md:text-2xl mx-4">•</span>
+            <span className="text-white text-xl md:text-2xl font-medium mx-4">Photography</span>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/photography/photo-20.png"
+            alt="Photography background"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center">
+          <div className="max-w-xl md:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
+              READY FOR <span className="block mt-2">
+                <span className="text-5xl md:text-6xl font-normal font-dancing-script">STUNNING</span> DESIGN?
+              </span>
+            </h2>
+            
+            <p className="text-white text-lg md:text-xl mb-8 mt-4">
+              Elevate your brand with professional design that captures your vision. 
+              From logos to complete brand identities, I create custom designs 
+              that make your business stand out in today's competitive market.
+            </p>
+            
+            <Link 
+              href="/portfolio" 
+              className="inline-block bg-[#26bcab] hover:bg-[#1e9d90] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 text-lg"
+            >
+              EXPLORE MY WORK →
+            </Link>
+          </div>
+          <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
+            <div className="relative w-full max-w-md">
+              <Image
+                src="/flyers.png"
+                alt="Design flyers"
+                width={400}
+                height={500}
+                className="object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+{/* Gradient Section with Logos */}
+<section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-r from-[#26bcab] to-[#134e48]">
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="flex flex-col md:flex-row items-center">
+      <div className="md:w-1/2 mb-10 md:mb-0">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          Creating a business that flows <span className="italic" style={{ fontFamily: 'cursive' }}>effortlessly</span>
+        </h2>
+        <p className="text-white text-lg md:text-xl mb-8">
+          For ambitious, passionate entrepreneurs ready to elevate their brand & website to the next level
+        </p>
+        
+        {/* Starbursts moved here and aligned left */}
+        <div className="flex space-x-4 mt-8">
+          {/* Logo 1 (Trios) */}
+          <div className="relative">
+            <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+              <Image
+                src="/starburst.png"
+                alt="Starburst background"
+                fill
+                className="object-contain"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Link href="https://www.trioscantina.com/" target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src="/trios-logos-04.png"
+                    alt="Trios Cantina"
+                    width={60}
+                    height={60}
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+          
+          {/* Logo 2 (Total Stone) */}
+          <div className="relative">
+            <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+              <Image
+                src="/starburst.png"
+                alt="Starburst background"
+                fill
+                className="object-contain"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Link href="https://total-stone.com/" target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src="/ts-logos-03.png"
+                    alt="Total Stone"
+                    width={60}
+                    height={60}
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+          
+          {/* Logo 3 (Veteran PCS) */}
+          <div className="relative">
+            <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+              <Image
+                src="/starburst.png"
+                alt="Starburst background"
+                fill
+                className="object-contain"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Link href="https://www.veteranpcs.com/" target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src="/vpcs-logos-02.png"
+                    alt="Veteran PCS"
+                    width={60}
+                    height={60}
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="md:w-1/2 flex justify-center md:justify-end">
+        <div className="relative">
           <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src="/steph-dress.png"
+            alt="Designer in red dress"
+            width={400}
+            height={600}
+            className="object-contain"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+    </main>
   );
-}
+} 
