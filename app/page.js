@@ -124,7 +124,7 @@ export default function Home() {
           Creating a business that flows <span className="italic" style={{ fontFamily: 'cursive' }}>effortlessly</span>
         </h2>
         <p className="text-white text-lg md:text-xl mb-8">
-          For ambitious, passionate entrepreneurs ready to elevate their brand & website to the next level
+          For ambitious, passionate entrepreneurs ready to elevate their brand and website to the next level
         </p>
         
         {/* Starbursts moved here and aligned left */}
