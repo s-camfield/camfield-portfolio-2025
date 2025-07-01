@@ -1,6 +1,6 @@
-// app/layout.js
 import './globals.css';
 import { Inter, Dancing_Script } from 'next/font/google';
+import Footer from '../components/footer'; // ✅ Correct import
 
 const inter = Inter({ subsets: ['latin'] });
 const dancingScript = Dancing_Script({ 
@@ -19,19 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${dancingScript.variable}`}>
       <body className={inter.className} suppressHydrationWarning>
         {children}
-      </body>
-    </html>
-  );
-}
-// app/layout.js
-import footer from '../components/footer';
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-        <Footer />
+        <Footer /> {/* ✅ Now this will render */}
       </body>
     </html>
   );
