@@ -23,3 +23,16 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+// app/layout.js
+import Footer from '../components/footer';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
+}
