@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   );
 }
 // app/layout.js
-import Footer from '../components/footer';
+import footer from '../components/footer';
 
 export default function RootLayout({ children }) {
   return (
