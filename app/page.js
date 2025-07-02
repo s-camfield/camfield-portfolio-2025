@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
-import Footer from '../components/Footer.js'; // ✅ import Footer
 
 export default function Home() {
   return (
@@ -26,7 +25,6 @@ export default function Home() {
       <section className="bg-[#26bcab] py-8 overflow-hidden">
         <div className="relative flex overflow-x-hidden">
           <div className="animate-marquee whitespace-nowrap py-2">
-            {/* scrolling content */}
             <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
             <span className="text-white text-xl md:text-2xl mx-4">•</span>
             <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
@@ -47,7 +45,7 @@ export default function Home() {
           </div>
 
           <div className="absolute top-0 animate-marquee2 whitespace-nowrap py-2">
-            {/* duplicate for seamless scroll */}
+            {/* duplicate scroll content */}
             <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
             <span className="text-white text-xl md:text-2xl mx-4">•</span>
             <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
@@ -115,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gradient Section with Logos */}
+      {/* Logo Grid */}
       <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-r from-[#26bcab] to-[#134e48]">
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center">
@@ -126,64 +124,46 @@ export default function Home() {
               <p className="text-white text-lg md:text-xl mb-8">
                 For ambitious, passionate entrepreneur&apos;s ready to elevate their brand and website to the next level
               </p>
-
-              {/* Starbursts */}
               <div className="flex space-x-4 mt-8">
-                {/* Trios */}
-                <div className="relative">
-                  <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                    <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Link href="https://www.trioscantina.com/" target="_blank">
-                        <Image src="/trios-logos-04.png" alt="Trios" width={60} height={60} className="object-contain" />
-                      </Link>
-                    </div>
+                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Link href="https://www.trioscantina.com/" target="_blank">
+                      <Image src="/trios-logos-04.png" alt="Trios" width={60} height={60} className="object-contain" />
+                    </Link>
                   </div>
                 </div>
-
-                {/* Total Stone */}
-                <div className="relative">
-                  <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                    <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Link href="https://total-stone.com/" target="_blank">
-                        <Image src="/ts-logos-03.png" alt="Total Stone" width={60} height={60} className="object-contain" />
-                      </Link>
-                    </div>
+                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Link href="https://total-stone.com/" target="_blank">
+                      <Image src="/ts-logos-03.png" alt="Total Stone" width={60} height={60} className="object-contain" />
+                    </Link>
                   </div>
                 </div>
-
-                {/* Veteran PCS */}
-                <div className="relative">
-                  <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                    <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Link href="https://www.veteranpcs.com/" target="_blank">
-                        <Image src="/vpcs-logos-02.png" alt="Veteran PCS" width={60} height={60} className="object-contain" />
-                      </Link>
-                    </div>
+                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Link href="https://www.veteranpcs.com/" target="_blank">
+                      <Image src="/vpcs-logos-02.png" alt="Veteran PCS" width={60} height={60} className="object-contain" />
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="md:w-1/2 flex justify-center md:justify-end">
-              <div className="relative">
-                <Image
-                  src="/steph-dress.png"
-                  alt="Designer in red dress"
-                  width={400}
-                  height={600}
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/steph-dress.png"
+                alt="Designer in red dress"
+                width={400}
+                height={600}
+                className="object-contain"
+              />
             </div>
           </div>
         </div>
       </section>
-
-      <Footer /> {/* ✅ Footer added here */}
-
     </main>
   );
 }
