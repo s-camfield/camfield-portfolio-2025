@@ -27,7 +27,6 @@ const projectDisplayNames = {
   'yale': 'Yale',
 };
 
-// 🔗 External site links
 const externalLinks = {
   'solid-oak': 'https://solidoakre.com/',
   'd-and-c': 'https://donahuecobbconsulting.com/',
@@ -104,7 +103,6 @@ export default async function ProjectPage({ params }) {
             including the client, the challenge, your approach, and the results.
           </p>
 
-          {/* View Site link if available */}
           {externalLink && (
             <a
               href={externalLink}
@@ -117,7 +115,6 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Gallery */}
         {files.images && files.images.length > 0 ? (
           <div className="space-y-8">
             {files.images.map((image, index) => {
@@ -142,10 +139,24 @@ export default async function ProjectPage({ params }) {
           </div>
         )}
 
-        {/* Videos */}
-        {files.videos && files.videos.length > 0 && (
+        {/* Videos Section */}
+        {project === 'vpcs' ? (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
+
+            {/* Embedded YouTube Short */}
+            <div className="relative w-full aspect-video mb-8">
+              <iframe
+                className="w-full h-full rounded"
+                src="https://www.youtube.com/embed/qVCfntkA5bo"
+                title="VeteranPCS YouTube Short"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+
+            {/* Local videos */}
             <div className="space-y-8">
               {files.videos.map((video) => (
                 <div key={video} className="relative w-full aspect-video">
@@ -160,8 +171,27 @@ export default async function ProjectPage({ params }) {
               ))}
             </div>
           </div>
+        ) : (
+          files.videos && files.videos.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold mb-6">Videos</h2>
+              <div className="space-y-8">
+                {files.videos.map((video) => (
+                  <div key={video} className="relative w-full aspect-video">
+                    <video
+                      controls
+                      className="w-full h-full"
+                      src={`/portfolio/${project}/${video}`}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
         )}
       </div>
     </main>
   );
-} 
+}
