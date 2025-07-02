@@ -154,10 +154,10 @@ export default function Home() {
 
             <div className="md:w-1/2 flex justify-center md:justify-end">
               <Image
-                src="/steph-dress.png"
-                alt="Designer in red dress"
-                width={400}
-                height={600}
+                src="/laptop.png"
+                alt="website design graphic"
+                width={500}
+                height={400}
                 className="object-contain"
               />
             </div>
