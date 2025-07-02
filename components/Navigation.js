@@ -31,6 +31,9 @@ export default function Navigation() {
             <Link href="/portfolio" className="hover:opacity-80 transition-opacity">
               PORTFOLIO
             </Link>
+            <Link href="/photography" className="hover:opacity-80 transition-opacity">
+              PHOTOGRAPHY
+            </Link>
             <Link href="/about" className="hover:opacity-80 transition-opacity">
               ABOUT
             </Link>
@@ -64,6 +67,13 @@ export default function Navigation() {
                   PORTFOLIO
                 </Link>
                 <Link 
+                  href="/photography" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  PHOTOGRAPHY
+                </Link>
+                <Link 
                   href="/about" 
                   onClick={() => setIsMenuOpen(false)}
                   className="hover:opacity-80 transition-opacity"
@@ -85,4 +95,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
