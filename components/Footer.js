@@ -1,4 +1,6 @@
 // components/Footer.js
+"use client";
+
 import { useEffect } from 'react';
 import Image from 'next/image';
 
@@ -27,7 +29,6 @@ export default function Footer() {
 
       {/* Footer Content */}
       <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-        {/* Column 1: Company Info */}
         <div>
           <h3 className="font-semibold uppercase mb-4">Camfield Designs</h3>
           <ul className="space-y-2">
@@ -36,8 +37,6 @@ export default function Footer() {
             <li><a href="/contact" className="hover:underline">Contact</a></li>
           </ul>
         </div>
-
-        {/* Column 2: Follow Us */}
         <div>
           <h3 className="font-semibold uppercase mb-4">Follow Us</h3>
           <div className="flex space-x-4">
@@ -49,21 +48,16 @@ export default function Footer() {
             </a>
           </div>
         </div>
-
-        {/* Column 3: Hours */}
         <div>
           <h3 className="font-semibold uppercase mb-4">Hours</h3>
           <p>Monday – Friday</p>
           <p>9:00 AM – 5:00 PM</p>
         </div>
-
-        {/* Column 4: Logo */}
         <div className="flex items-center justify-center md:justify-end">
           <img src="/logo-footer.svg" alt="Camfield Designs Logo" className="h-12 opacity-60" />
         </div>
       </div>
 
-      {/* Bottom copyright */}
       <div className="text-center text-xs text-gray-400 pb-6">
         &copy; {new Date().getFullYear()} Camfield Designs. All rights reserved.
       </div>
