@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
-import Footer from '../components/Footer'; // ✅ import Footer
+import Footer from '../components/Footer.js'; // ✅ import Footer
 
 export default function Home() {
   return (
