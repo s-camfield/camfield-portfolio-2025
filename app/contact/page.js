@@ -26,7 +26,7 @@ export default function ContactPage() {
       <section className="relative h-[60vh]">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/photography/photo-8.png"
+            src="/photography/photo-4.png"
             alt="Hero background"
             fill
             style={{ objectFit: 'cover' }}
