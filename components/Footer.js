@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
   const pathname = usePathname();
@@ -40,29 +41,58 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold uppercase mb-4">Camfield Designs</h3>
           <ul className="space-y-2">
-            <li><a href="/about" className="hover:underline">About</a></li>
-            <li><a href="/portfolio" className="hover:underline">Portfolio</a></li>
-            <li><a href="/contact" className="hover:underline">Contact</a></li>
+            <li><Link href="/about" className="hover:underline">About</Link></li>
+            <li><Link href="/portfolio" className="hover:underline">Portfolio</Link></li>
+            <li><Link href="/contact" className="hover:underline">Contact</Link></li>
           </ul>
         </div>
+
         <div>
           <h3 className="font-semibold uppercase mb-4">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="https://www.instagram.com/steph_field12" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="/icons/instagram.svg" alt="Instagram" className="h-6 w-6" />
+            <a
+              href="https://www.instagram.com/steph_field12"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <Image
+                src="/icons/instagram.svg"
+                alt="Instagram"
+                width={24}
+                height={24}
+              />
             </a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <img src="/icons/youtube.svg" alt="YouTube" className="h-6 w-6" />
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              <Image
+                src="/icons/youtube.svg"
+                alt="YouTube"
+                width={24}
+                height={24}
+              />
             </a>
           </div>
         </div>
+
         <div>
           <h3 className="font-semibold uppercase mb-4">Hours</h3>
           <p>Monday – Friday</p>
           <p>9:00 AM – 5:00 PM</p>
         </div>
+
         <div className="flex items-center justify-center md:justify-end">
-          <img src="/logo-footer.svg" alt="Camfield Designs Logo" className="h-12 opacity-60" />
+          <Image
+            src="/logo-footer.svg"
+            alt="Camfield Designs Logo"
+            width={100}
+            height={48}
+            className="opacity-60"
+          />
         </div>
       </div>
 

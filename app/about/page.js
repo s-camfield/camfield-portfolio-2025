@@ -24,13 +24,13 @@ export default function About() {
           <div>
             <h1 className="text-4xl font-bold mb-6 text-[#27bdab]">Meet Stephanie</h1>
             <p className="text-lg mb-4 leading-relaxed">
-              I'm a creative professional who's passionate about the artistic side of business.
-              Whether it's designing a brand identity, capturing the perfect image, or building an
-              interactive website, I love figuring out how to tell each project's unique story.
+              I&rsquo;m a creative professional who&rsquo;s passionate about the artistic side of business.
+              Whether it&rsquo;s designing a brand identity, capturing the perfect image, or building an
+              interactive website, I love figuring out how to tell each project&rsquo;s unique story.
             </p>
 
             <p className="text-lg mb-4 leading-relaxed">
-              When I'm not designing, I'm either traveling, hiking a new trail, or spending time with
+              When I&rsquo;m not designing, I&rsquo;m either traveling, hiking a new trail, or spending time with
               my two boys. My work is driven by a love of storytelling, clean aesthetics, and helping
               others bring their visions to life.
             </p>
@@ -50,4 +50,4 @@ export default function About() {
       </section>
     </main>
   );
-} 
+}
