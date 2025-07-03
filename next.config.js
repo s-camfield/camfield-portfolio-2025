@@ -1,16 +1,10 @@
 // next.config.js
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: [],
+  webpack(config) {
+    config.resolve.alias['@'] = __dirname;
+    return config;
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  output: 'export', // ✅ Static export mode
 };
 
 module.exports = nextConfig;
-
