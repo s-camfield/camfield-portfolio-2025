@@ -1,12 +1,9 @@
-// app/blog/[slug]/page.tsx
-
 import { groq } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
 
 export const revalidate = 60;
 
@@ -19,13 +16,7 @@ const query = groq`
   }
 `;
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await client.fetch(query, { slug: params.slug });
 
   return (
