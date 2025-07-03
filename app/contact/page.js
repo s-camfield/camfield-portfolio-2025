@@ -12,7 +12,6 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitted(true);
 
-    // Simulate sending form – replace with real API later
     setTimeout(() => {
       e.target.reset();
     }, 1000);
@@ -22,19 +21,19 @@ export default function ContactPage() {
     <main className="bg-white min-h-screen text-gray-800">
       <Navigation />
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-[60vh]">
         <div className="absolute inset-0 z-0">
           <Image
             src="/photography/photo-4.png"
-            alt="Hero background"
+            alt="Contact background"
             fill
             style={{ objectFit: 'cover' }}
             priority
           />
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
-        <div className="relative z-20 flex items-center justify-center h-full">
+        <div className="relative z-10 flex h-full items-center justify-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">
             Let me grab a pen!
           </h1>
@@ -69,8 +68,8 @@ export default function ContactPage() {
                   <input
                     type="text"
                     name="First Name"
-                    required
                     className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#27bdab]"
+                    required
                   />
                 </div>
                 <div>
