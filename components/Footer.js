@@ -1,31 +1,39 @@
-// components/Footer.js
 "use client";
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 export default function Footer() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://snapwidget.com/js/snapwidget.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
+    if (pathname === '/' || pathname === '/about' || pathname === '/contact') {
+      const script = document.createElement('script');
+      script.src = 'https://snapwidget.com/js/snapwidget.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, [pathname]);
+
+  const showInstagram = pathname === '/' || pathname === '/about' || pathname === '/contact';
 
   return (
     <footer className="bg-white border-t mt-16 text-gray-800">
-      {/* Instagram Feed */}
-      <div className="overflow-hidden">
-        <iframe
-          src="https://snapwidget.com/embed/1101382"
-          className="snapwidget-widget w-full h-[280px]"
-          allowTransparency="true"
-          frameBorder="0"
-          scrolling="no"
-          style={{ border: 'none', overflow: 'hidden', width: '100%', height: '280px' }}
-          title="Instagram Feed"
-        ></iframe>
-      </div>
+      {/* Instagram Feed (only on homepage, about, and contact) */}
+      {showInstagram && (
+        <div className="overflow-hidden">
+          <iframe
+            src="https://snapwidget.com/embed/1101382"
+            className="snapwidget-widget w-full h-[280px]"
+            allowTransparency="true"
+            frameBorder="0"
+            scrolling="no"
+            style={{ border: 'none', overflow: 'hidden', width: '100%', height: '280px' }}
+            title="Instagram Feed"
+          ></iframe>
+        </div>
+      )}
 
       {/* Footer Content */}
       <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
