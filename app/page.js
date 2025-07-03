@@ -67,6 +67,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Portfolio Scrolling Section */}
+      <section className="py-16 bg-white">
+        <h2 className="text-4xl font-bold text-center text-[#27bdab] mb-12">Portfolio</h2>
+        <div className="overflow-x-auto whitespace-nowrap px-4">
+          <div className="inline-flex space-x-6 animate-scroll">
+            {[
+              { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
+              { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
+              { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
+              { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
+              { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" }
+            ].map(({ src, link }, idx) => (
+              <a href={link} key={idx} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={src}
+                  alt={`Portfolio item ${idx + 1}`}
+                  className="h-64 rounded-xl transition-transform duration-300 hover:scale-105 object-cover"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
