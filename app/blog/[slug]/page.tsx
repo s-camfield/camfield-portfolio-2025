@@ -7,12 +7,13 @@ import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-type Props = {
+interface PageProps {
   params: {
     slug: string;
   };
-};
+}
 
 export const revalidate = 60;
 
@@ -25,7 +26,7 @@ const query = groq`
   }
 `;
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: PageProps) {
   const post = await client.fetch(query, { slug: params.slug });
 
   return (
@@ -34,7 +35,9 @@ export default async function BlogPostPage({ params }: Props) {
 
       <article className="container mx-auto px-6 py-16 max-w-3xl">
         <h1 className="text-4xl font-bold text-[#27bdab] mb-4">{post.title}</h1>
-        <p className="text-gray-500 text-sm mb-6">{new Date(post.publishedAt).toDateString()}</p>
+        <p className="text-gray-500 text-sm mb-6">
+          {new Date(post.publishedAt).toDateString()}
+        </p>
 
         {post.mainImage?.asset?.url && (
           <Image
