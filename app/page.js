@@ -25,67 +25,17 @@ export default function Home() {
       <section className="bg-[#26bcab] py-8 overflow-hidden">
         <div className="relative flex overflow-x-hidden">
           <div className="animate-marquee whitespace-nowrap py-2">
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Web Designer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Videography</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Animation</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Video Editing</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Content Creation</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Developer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Photography</span>
-          </div>
-
-          <div className="absolute top-0 animate-marquee2 whitespace-nowrap py-2">
-            {/* duplicate scroll content */}
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Graphic Designer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Branding</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Web Designer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Videography</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Animation</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Video Editing</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Content Creation</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Developer</span>
-            <span className="text-white text-xl md:text-2xl mx-4">•</span>
-            <span className="text-white text-xl md:text-2xl font-medium mx-4">Photography</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio Scrolling Section */}
-      <section className="py-16 bg-white">
-        <h2 className="text-4xl font-bold text-center text-[#27bdab] mb-12">Portfolio</h2>
-        <div className="overflow-x-auto whitespace-nowrap px-4">
-          <div className="inline-flex space-x-6 animate-scroll">
             {[
-              { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
-              { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
-              { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
-              { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
-              { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" }
-            ].map(({ src, link }, idx) => (
-              <a href={link} key={idx} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={src}
-                  alt={`Portfolio item ${idx + 1}`}
-                  className="h-64 rounded-xl transition-transform duration-300 hover:scale-105 object-cover"
-                />
-              </a>
+              "Graphic Designer", "Branding", "Web Designer", "Videography", "Animation", "Video Editing", "Content Creation", "Developer", "Photography"
+            ].flatMap((text, i, arr) => (
+              [<span key={i} className="text-white text-xl md:text-2xl font-medium mx-4">{text}</span>, i < arr.length - 1 && <span key={`dot-${i}`} className="text-white text-xl md:text-2xl mx-4">•</span>]
+            ))}
+          </div>
+          <div className="absolute top-0 animate-marquee2 whitespace-nowrap py-2">
+            {[
+              "Graphic Designer", "Branding", "Web Designer", "Videography", "Animation", "Video Editing", "Content Creation", "Developer", "Photography"
+            ].flatMap((text, i, arr) => (
+              [<span key={i} className="text-white text-xl md:text-2xl font-medium mx-4">{text}</span>, i < arr.length - 1 && <span key={`dot-${i}`} className="text-white text-xl md:text-2xl mx-4">•</span>]
             ))}
           </div>
         </div>
@@ -137,6 +87,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Portfolio Scrolling Section */}
+      <section className="py-16 bg-transparent -mt-8">
+        <h2 className="text-4xl font-bold text-center text-white mb-12 drop-shadow-lg">Portfolio</h2>
+        <div className="overflow-x-auto whitespace-nowrap px-0">
+          <div className="inline-flex space-x-6 animate-scroll">
+            {[
+              { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
+              { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
+              { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
+              { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
+              { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" }
+            ].map(({ src, link }, idx) => (
+              <a href={link} key={idx} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={src}
+                  alt={`Portfolio item ${idx + 1}`}
+                  className="h-64 rounded-xl transition-transform duration-300 hover:scale-105 object-cover shadow-lg"
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Logo Grid */}
       <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-r from-[#26bcab] to-[#134e48]">
         <div className="container mx-auto px-4 relative z-10">
@@ -149,30 +123,20 @@ export default function Home() {
                 For ambitious, passionate entrepreneur&apos;s ready to elevate their brand and website to the next level
               </p>
               <div className="flex space-x-4 mt-8">
-                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Link href="https://www.trioscantina.com/" target="_blank">
-                      <Image src="/trios-logos-04.png" alt="Trios" width={60} height={60} className="object-contain" />
-                    </Link>
+                {[
+                  { href: "https://www.trioscantina.com/", src: "/trios-logos-04.png" },
+                  { href: "https://total-stone.com/", src: "/ts-logos-03.png" },
+                  { href: "https://www.veteranpcs.com/", src: "/vpcs-logos-02.png" }
+                ].map(({ href, src }, i) => (
+                  <div key={i} className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
+                    <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Link href={href} target="_blank">
+                        <Image src={src} alt="Client Logo" width={60} height={60} className="object-contain" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Link href="https://total-stone.com/" target="_blank">
-                      <Image src="/ts-logos-03.png" alt="Total Stone" width={60} height={60} className="object-contain" />
-                    </Link>
-                  </div>
-                </div>
-                <div className="relative w-24 h-24 transition-transform duration-300 hover:scale-110 cursor-pointer">
-                  <Image src="/starburst.png" alt="Starburst" fill className="object-contain" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Link href="https://www.veteranpcs.com/" target="_blank">
-                      <Image src="/vpcs-logos-02.png" alt="Veteran PCS" width={60} height={60} className="object-contain" />
-                    </Link>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
