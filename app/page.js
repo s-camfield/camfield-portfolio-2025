@@ -87,9 +87,9 @@ export default function Home() {
         </div>
       </section>
 
-          {/* Portfolio Scrolling Section */}
-      <section className="py-16 bg-[#26bcab] relative overflow-hidden">
-        <h2 className="text-4xl font-bold text-center text-white mb-12 drop-shadow-lg">Portfolio</h2>
+      {/* Portfolio Scrolling Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <h2 className="text-4xl font-bold text-center text-[#27bdab] mb-12 drop-shadow-lg">Portfolio</h2>
         <div className="relative w-full overflow-x-hidden">
           <div className="flex animate-scrollPortfolio w-max">
             {[
@@ -98,7 +98,7 @@ export default function Home() {
               { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
               { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
               { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" },
-              // Duplicate to create seamless loop
+              // Duplicates for seamless scroll
               { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
               { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
               { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
