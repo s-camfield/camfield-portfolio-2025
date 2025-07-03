@@ -87,23 +87,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio Scrolling Section */}
-      <section className="py-16 bg-transparent -mt-8">
+          {/* Portfolio Scrolling Section */}
+      <section className="py-16 bg-[#26bcab] relative overflow-hidden">
         <h2 className="text-4xl font-bold text-center text-white mb-12 drop-shadow-lg">Portfolio</h2>
-        <div className="overflow-x-auto whitespace-nowrap px-0">
-          <div className="inline-flex space-x-6 animate-scroll">
+        <div className="relative w-full overflow-x-hidden">
+          <div className="flex animate-scrollPortfolio w-max">
             {[
+              { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
+              { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
+              { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
+              { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
+              { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" },
+              // Duplicate to create seamless loop
               { src: "/portfolio/66/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/66" },
               { src: "/portfolio/find-your-fitness/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/find-your-fitness" },
               { src: "/portfolio/mugzle/thumbnail.png", link: "https://www.camfielddesigns.com/portfolio/mugzle" },
               { src: "/portfolio/soldner/branding-03.png", link: "https://www.camfielddesigns.com/portfolio/soldner" },
               { src: "/portfolio/total-stone/booklet-08.png", link: "https://www.camfielddesigns.com/portfolio/total-stone" }
             ].map(({ src, link }, idx) => (
-              <a href={link} key={idx} target="_blank" rel="noopener noreferrer">
+              <a href={link} key={idx} target="_blank" rel="noopener noreferrer" className="mx-2">
                 <img
                   src={src}
                   alt={`Portfolio item ${idx + 1}`}
-                  className="h-64 rounded-xl transition-transform duration-300 hover:scale-105 object-cover shadow-lg"
+                  className="h-64 rounded-xl transition-transform duration-300 hover:scale-105 object-cover"
                 />
               </a>
             ))}
