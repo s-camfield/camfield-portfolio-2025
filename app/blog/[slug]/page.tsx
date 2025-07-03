@@ -1,9 +1,9 @@
 import { groq } from 'next-sanity';
-import { client } from '@/sanity/lib/client';
+import { client } from '../../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Navigation from '../../../components/Navigation';
+import Footer from '../../../components/Footer';
 
 export const revalidate = 60;
 
@@ -16,7 +16,12 @@ const query = groq`
   }
 `;
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+// ✅ Inline param typing to avoid mismatch with inferred PageProps on Vercel
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await client.fetch(query, { slug: params.slug });
 
   return (
