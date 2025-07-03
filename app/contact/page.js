@@ -12,7 +12,7 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitted(true);
 
-    // Simulate sending form (add real API call later if needed)
+    // simulate sending form – you can replace this with a real API call later
     setTimeout(() => {
       e.target.reset();
     }, 1000);
@@ -24,8 +24,7 @@ export default function ContactPage() {
 
       {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 -z-10">
           <Image
             src="/photography/photo-8.png"
             alt="Hero background"
@@ -33,13 +32,9 @@ export default function ContactPage() {
             className="object-cover"
             priority
           />
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
-
-        {/* Text */}
-        <h1 className="relative z-20 text-4xl md:text-5xl font-bold text-white text-center px-4">
+        <h1 className="relative z-10 text-4xl md:text-5xl font-bold text-white text-center px-4">
           Let me grab a pen!
         </h1>
       </section>
@@ -60,7 +55,7 @@ export default function ContactPage() {
             <p className="text-sm text-gray-500">— or send me a message using this form:</p>
           </div>
 
-          {/* Right: Contact Form */}
+          {/* Right: Contact Form or Confirmation */}
           {!submitted ? (
             <form
               onSubmit={handleSubmit}
@@ -116,7 +111,9 @@ export default function ContactPage() {
           ) : (
             <div className="p-8 bg-white rounded-xl shadow-md text-center space-y-4">
               <h3 className="text-2xl font-bold text-[#27bdab]">Thanks for reaching out!</h3>
-              <p className="text-gray-700 text-lg">I’ll get back to you as soon as I can.</p>
+              <p className="text-gray-700 text-lg">
+                I’ll get back to you as soon as I can.
+              </p>
               <Link
                 href="/"
                 className="inline-block mt-4 bg-[#27bdab] hover:bg-[#1ca595] text-white font-bold py-3 px-6 rounded-full transition duration-300"
