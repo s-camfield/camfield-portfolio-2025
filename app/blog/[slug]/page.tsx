@@ -7,13 +7,6 @@ import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
 
 export const revalidate = 60;
 
@@ -25,6 +18,12 @@ const query = groq`
     mainImage { asset->{url} }
   }
 `;
+
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
 
 export default async function BlogPostPage({ params }: PageProps) {
   const post = await client.fetch(query, { slug: params.slug });
