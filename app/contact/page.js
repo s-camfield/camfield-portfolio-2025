@@ -12,7 +12,6 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitted(true);
 
-    // simulate sending form – you can replace this with a real API call later
     setTimeout(() => {
       e.target.reset();
     }, 1000);
@@ -22,25 +21,29 @@ export default function ContactPage() {
     <main className="bg-white min-h-screen text-gray-800">
       <Navigation />
 
-      {/* Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center">
-        <Image
-          src="/photography/photo-8.png"
-          alt="Hero background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <h1 className="relative z-10 text-4xl md:text-5xl font-bold text-white text-center px-4">
-          Let me grab a pen!
-        </h1>
+      {/* Hero Section */}
+      <section className="relative h-[60vh] w-full">
+        <div className="relative w-full h-full">
+          <Image
+            src="/photography/photo-8.png"
+            alt="Hero background"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">
+              Let me grab a pen!
+            </h1>
+          </div>
+        </div>
       </section>
 
       {/* Contact Section */}
       <section className="bg-[#f8f8f8] py-20 px-4">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: Email Info */}
+          {/* Left Column: Info */}
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-[#27bdab]">For commissions or project inquiries:</h2>
             <p className="text-lg">Please email me directly at:</p>
@@ -53,7 +56,7 @@ export default function ContactPage() {
             <p className="text-sm text-gray-500">— or send me a message using this form:</p>
           </div>
 
-          {/* Right: Contact Form */}
+          {/* Right Column: Form or Confirmation */}
           {!submitted ? (
             <form
               onSubmit={handleSubmit}
@@ -109,9 +112,7 @@ export default function ContactPage() {
           ) : (
             <div className="p-8 bg-white rounded-xl shadow-md text-center space-y-4">
               <h3 className="text-2xl font-bold text-[#27bdab]">Thanks for reaching out!</h3>
-              <p className="text-gray-700 text-lg">
-                I’ll get back to you as soon as I can.
-              </p>
+              <p className="text-gray-700 text-lg">I’ll get back to you as soon as I can.</p>
               <Link
                 href="/"
                 className="inline-block mt-4 bg-[#27bdab] hover:bg-[#1ca595] text-white font-bold py-3 px-6 rounded-full transition duration-300"
