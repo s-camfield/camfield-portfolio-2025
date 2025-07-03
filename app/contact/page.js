@@ -11,7 +11,6 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-
     setTimeout(() => {
       e.target.reset();
     }, 1000);
@@ -21,20 +20,19 @@ export default function ContactPage() {
     <main className="bg-white min-h-screen text-gray-800">
       <Navigation />
 
-      {/* Hero */}
+      {/* Hero Section (mirrors homepage) */}
       <section className="relative h-[60vh]">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/photography/photo-4.png"
-            alt="Contact background"
+            src="/photography/photo-4.png" // or whichever image you'd like
+            alt="Hero background"
             fill
             style={{ objectFit: 'cover' }}
             priority
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        <div className="relative z-10 flex h-full items-center justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center px-4">
+        <div className="relative z-10 flex items-center justify-center h-full px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
             Let me grab a pen!
           </h1>
         </div>
