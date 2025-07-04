@@ -1,11 +1,12 @@
 // app/blog/page.tsx
 
 import { groq } from 'next-sanity';
-import { client } from '@/sanity/lib/client';
+// Update the import path below if your client file is located elsewhere, e.g. '../../sanity/lib/client' or 'sanity/lib/client'
+import { client } from '../../sanity/lib/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import Navigation from '../../components/Navigation';
+import Footer from '../../components/Footer';
 
 type Post = {
   _id: string;

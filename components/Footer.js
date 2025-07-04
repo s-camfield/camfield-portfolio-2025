@@ -27,7 +27,6 @@ export default function Footer() {
           <iframe
             src="https://snapwidget.com/embed/1101382"
             className="snapwidget-widget w-full h-[280px]"
-            allowTransparency="true"
             frameBorder="0"
             scrolling="no"
             style={{ border: 'none', overflow: 'hidden', width: '100%', height: '280px' }}

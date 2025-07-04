@@ -16,8 +16,7 @@ const query = groq`
   }
 `;
 
-// ✅ Inline param typing to avoid mismatch with inferred PageProps on Vercel
-export default async function BlogPostPage({
+export default async function PostPage({
   params,
 }: {
   params: { slug: string };
