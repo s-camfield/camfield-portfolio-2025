@@ -1,4 +1,4 @@
-// app/blog/page.js
+// app/blog/page.js (rename from .tsx to .js)
 import Navigation from '../../components/Navigation';
 import { client } from '../../sanity/lib/client';
 import Link from 'next/link';

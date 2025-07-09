@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.tsx
+// app/blog/[slug]/page.js (rename from .tsx to .js)
 import { client } from '../../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
@@ -8,12 +8,7 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 60; // Revalidate this page every 60 seconds
 
-// Define the correct type for params in Next.js 15
-interface BlogPostPageProps {
-  params: Promise<{ slug: string }>;
-}
-
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }) {
   // Await the params to get the slug
   const { slug } = await params;
   
@@ -25,7 +20,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     });
   } catch (error) {
     console.error("Error fetching post:", error);
-    // Continue with undefined post if there's an error
   }
 
   if (!post) {
@@ -53,7 +47,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         )}
         
-        <div className="prose max-w-none">
+        {/* Add basic styling directly to the container */}
+        <div className="blog-content">
           <PortableText value={post.body} />
         </div>
       </article>
