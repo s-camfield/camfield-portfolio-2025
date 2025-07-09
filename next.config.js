@@ -11,19 +11,17 @@ const nextConfig = {
   },
   // Add this configuration to reduce function size
   output: 'standalone',
-  experimental: {
-    // Configure output file tracing to exclude large directories
-    outputFileTracingExcludes: {
-      '*': [
-        'node_modules/@swc/core-linux-x64-gnu',
-        'node_modules/@swc/core-linux-x64-musl',
-        'node_modules/@esbuild/linux-x64',
-        'node_modules/sharp/vendor',
-        '.git',
-        '.next/cache',
-        'sanity/node_modules',
-      ],
-    },
+  // Move this outside of experimental
+  outputFileTracingExcludes: {
+    '*': [
+      'node_modules/@swc/core-linux-x64-gnu',
+      'node_modules/@swc/core-linux-x64-musl',
+      'node_modules/@esbuild/linux-x64',
+      'node_modules/sharp/vendor',
+      '.git',
+      '.next/cache',
+      'sanity/node_modules',
+    ],
   },
 };
 

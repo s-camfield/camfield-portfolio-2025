@@ -1,10 +1,8 @@
 // app/portfolio/[project]/page.js
-import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
 
-// Use Edge Runtime to avoid serverless function size limits
-export const runtime = 'edge';
+// Remove the Edge runtime export
 
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
@@ -61,9 +59,9 @@ const projectImages = {
   'yale': ['yale-1.png'],
 };
 
-// Define project videos statically
-const projectVideos = {
-  'vpcs': ['vpcs-video-1.mp4']
+// Keep only YouTube videos, remove local video files
+const youtubeVideos = {
+  'vpcs': ['https://www.youtube.com/embed/qVCfntkA5bo']
 };
 
 export async function generateStaticParams() {
@@ -81,7 +79,7 @@ export default async function ProjectPage({ params }) {
   }
 
   const images = projectImages[project] || [];
-  const videos = projectVideos[project] || [];
+  const videos = youtubeVideos[project] || [];
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
 
@@ -129,55 +127,25 @@ export default async function ProjectPage({ params }) {
           </div>
         )}
 
-        {/* Videos Section */}
-        {project === 'vpcs' ? (
+        {/* Videos Section - YouTube Only */}
+        {videos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
-
-            <div className="relative w-full aspect-video mb-8">
-              <iframe
-                className="w-full h-full rounded"
-                src="https://www.youtube.com/embed/qVCfntkA5bo"
-                title="VeteranPCS YouTube Short"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-
             <div className="space-y-8">
-              {videos.map((video) => (
-                <div key={video} className="relative w-full aspect-video">
-                  <video
-                    controls
-                    className="w-full h-full"
-                    src={`/portfolio/${project}/${video}`}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+              {videos.map((videoUrl, index) => (
+                <div key={index} className="relative w-full aspect-video mb-8">
+                  <iframe
+                    className="w-full h-full rounded"
+                    src={videoUrl}
+                    title={`${displayName} Video ${index + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               ))}
             </div>
           </div>
-        ) : (
-          videos.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Videos</h2>
-              <div className="space-y-8">
-                {videos.map((video) => (
-                  <div key={video} className="relative w-full aspect-video">
-                    <video
-                      controls
-                      className="w-full h-full"
-                      src={`/portfolio/${project}/${video}`}
-                    >
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
         )}
       </div>
     </main>
