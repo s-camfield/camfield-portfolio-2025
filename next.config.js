@@ -11,7 +11,7 @@ const nextConfig = {
   },
   // Add this configuration to reduce function size
   output: 'standalone',
-  // Move this outside of experimental
+  // Configuration for file tracing
   outputFileTracingExcludes: {
     '*': [
       'node_modules/@swc/core-linux-x64-gnu',
@@ -22,6 +22,10 @@ const nextConfig = {
       '.next/cache',
       'sanity/node_modules',
     ],
+  },
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 

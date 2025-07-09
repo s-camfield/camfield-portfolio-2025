@@ -2,8 +2,7 @@
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
 
-// Remove the Edge runtime export
-
+// Define project display names
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
   'baca': 'Baca',
@@ -27,6 +26,7 @@ const projectDisplayNames = {
   'yale': 'Yale',
 };
 
+// Define external links
 const externalLinks = {
   'solid-oak': 'https://solidoakre.com/',
   'd-and-c': 'https://donahuecobbconsulting.com/',
@@ -59,7 +59,7 @@ const projectImages = {
   'yale': ['yale-1.png'],
 };
 
-// Keep only YouTube videos, remove local video files
+// Define YouTube videos
 const youtubeVideos = {
   'vpcs': ['https://www.youtube.com/embed/qVCfntkA5bo']
 };
