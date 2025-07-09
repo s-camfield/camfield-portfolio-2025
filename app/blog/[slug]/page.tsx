@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.js
+// app/blog/[slug]/page.tsx
 import { client } from '../../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
@@ -8,11 +8,13 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 60; // Revalidate this page every 60 seconds
 
+// Define the correct type for params in Next.js 15
 interface BlogPostPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  // Await the params to get the slug
   const { slug } = await params;
   
   let post;
