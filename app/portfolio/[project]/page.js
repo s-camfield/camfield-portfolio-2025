@@ -1,7 +1,7 @@
 // app/portfolio/[project]/page.js
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import PortfolioImage from '../../../components/PortfolioImage'; // We'll create this component
 
 // Define project display names
 const projectDisplayNames = {
@@ -82,18 +82,14 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Use Next.js Image component with fallback */}
+        {/* Image Section - Use our Client Component */}
         <div className="space-y-8">
-          {/* Try to load multiple numbered images */}
           {[1, 2, 3, 4, 5].map((num) => (
-            <ImageWithFallback
+            <PortfolioImage
               key={num}
-              src={`/portfolio/${project}/${project}-${num}.png`}
-              fallbackSrc={`/portfolio/${project}/${project}-${num}.jpg`}
+              project={project}
+              imageNumber={num}
               alt={`${displayName} - Image ${num}`}
-              width={1200}
-              height={675}
-              className="w-full h-auto rounded-lg shadow-md"
             />
           ))}
         </div>
@@ -116,27 +112,5 @@ export default async function ProjectPage({ params }) {
         )}
       </div>
     </main>
-  );
-}
-
-// Custom component to handle image fallbacks
-function ImageWithFallback({ src, fallbackSrc, alt, ...props }) {
-  return (
-    <div className="relative w-full aspect-video">
-      <img
-        src={src}
-        alt={alt}
-        onError={(e) => {
-          e.currentTarget.onerror = null; // Prevent infinite loop
-          if (fallbackSrc) {
-            e.currentTarget.src = fallbackSrc;
-          } else {
-            e.currentTarget.style.display = 'none'; // Hide if both src and fallback fail
-          }
-        }}
-        className="w-full h-full object-contain"
-        {...props}
-      />
-    </div>
   );
 }
