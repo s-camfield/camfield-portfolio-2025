@@ -40,7 +40,7 @@ export default function Navigation() {
             <Link href="/contact" className="hover:opacity-80 transition-opacity">
               CONTACT
             </Link>
-            <Link href="/blog" className="hover:opacity-80 transition-opacity">
+            <Link href="/blog-coming-soon" className="hover:opacity-80 transition-opacity">
               BLOG
             </Link>
           </div>
@@ -91,7 +91,7 @@ export default function Navigation() {
                   CONTACT
                 </Link>
                 <Link 
-                  href="/blog" 
+                  href="/blog-coming-soon" 
                   onClick={() => setIsMenuOpen(false)}
                   className="hover:opacity-80 transition-opacity"
                 >
