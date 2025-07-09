@@ -1,7 +1,7 @@
 // app/portfolio/[project]/page.js
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
-import PortfolioImage from '../../../components/PortfolioImage'; // We'll create this component
+import Link from 'next/link';
 
 // Define project display names
 const projectDisplayNames = {
@@ -36,6 +36,22 @@ const externalLinks = {
   'trios': 'https://www.trioscantina.com/',
 };
 
+// Define project images with specific file paths
+const projectImages = {
+  '66': ['thumbnail.png'],
+  'find-your-fitness': ['thumbnail.png'],
+  'mugzles': ['thumbnail.png'],
+  'soldner': ['branding-03.png'],
+  'total-stone': ['booklet-08.png'],
+  'vpcs': ['vpcs-1.png', 'vpcs-2.png'],
+  // Add other projects with their specific image paths
+};
+
+// Define YouTube videos
+const youtubeVideos = {
+  'vpcs': ['https://www.youtube.com/embed/qVCfntkA5bo']
+};
+
 export async function generateStaticParams() {
   return Object.keys(projectDisplayNames).map((key) => ({
     project: key,
@@ -52,10 +68,8 @@ export default async function ProjectPage({ params }) {
 
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
-
-  // For VeteranPCS, use a specific YouTube video
-  const hasYoutubeVideo = project === 'vpcs';
-  const youtubeUrl = 'https://www.youtube.com/embed/qVCfntkA5bo';
+  const images = projectImages[project] || [];
+  const videos = youtubeVideos[project] || [];
 
   return (
     <main className="min-h-screen bg-white">
@@ -82,32 +96,61 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Use our Client Component */}
+        {/* Image Section */}
         <div className="space-y-8">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <PortfolioImage
-              key={num}
-              project={project}
-              imageNumber={num}
-              alt={`${displayName} - Image ${num}`}
-            />
+          {images.map((image, index) => (
+            <div key={index} className="relative w-full aspect-video">
+              <img
+                src={`/portfolio/${project}/${image}`}
+                alt={`${displayName} - Image ${index + 1}`}
+                className="w-full h-full object-contain rounded-lg shadow-md"
+              />
+            </div>
           ))}
+          
+          {/* If no specific images are defined, try some common patterns */}
+          {images.length === 0 && (
+            <>
+              <div className="relative w-full aspect-video">
+                <img
+                  src={`/portfolio/${project}/thumbnail.png`}
+                  alt={`${displayName} - Thumbnail`}
+                  className="w-full h-full object-contain rounded-lg shadow-md"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              </div>
+              <div className="relative w-full aspect-video">
+                <img
+                  src={`/portfolio/${project}/${project}-1.png`}
+                  alt={`${displayName} - Image 1`}
+                  className="w-full h-full object-contain rounded-lg shadow-md"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              </div>
+            </>
+          )}
         </div>
 
         {/* Videos Section - YouTube Only */}
-        {hasYoutubeVideo && (
+        {videos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
-            <div className="relative w-full aspect-video mb-8">
-              <iframe
-                className="w-full h-full rounded"
-                src={youtubeUrl}
-                title={`${displayName} YouTube Video`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
+            {videos.map((videoUrl, index) => (
+              <div key={index} className="relative w-full aspect-video mb-8">
+                <iframe
+                  className="w-full h-full rounded"
+                  src={videoUrl}
+                  title={`${displayName} Video ${index + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ))}
           </div>
         )}
       </div>
