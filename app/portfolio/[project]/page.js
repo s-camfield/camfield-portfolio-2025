@@ -1,8 +1,10 @@
 // app/portfolio/[project]/page.js
-import { promises as fs } from 'fs';
-import path from 'path';
+import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
+
+// Use Edge Runtime to avoid serverless function size limits
+export const runtime = 'edge';
 
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
@@ -35,59 +37,52 @@ const externalLinks = {
   'trios': 'https://www.trioscantina.com/',
 };
 
+// Define project images statically to avoid filesystem operations
+const projectImages = {
+  '66': ['66-1.png', '66-2.png'],
+  'baca': ['baca-1.png', 'baca-2.png'],
+  'bayshore': ['bayshore-1.png', 'bayshore-2.png'],
+  'castle-rock': ['castle-rock-1.png'],
+  'd-and-c': ['d-and-c-1.png', 'd-and-c-2.png'],
+  'f-up': ['f-up-1.png'],
+  'find-your-fitness': ['find-your-fitness-1.png'],
+  'ioc': ['ioc-1.png'],
+  'michigan': ['michigan-1.png'],
+  'mike': ['mike-1.png'],
+  'mohers': ['mohers-1.png'],
+  'mugzles': ['mugzles-1.png'],
+  'soldner': ['soldner-1.png'],
+  'solid-oak': ['solid-oak-1.png', 'solid-oak-2.png'],
+  'sunshine': ['sunshine-1.png'],
+  'sweet-roast': ['sweet-roast-1.png'],
+  'total-stone': ['total-stone-1.png', 'total-stone-2.png'],
+  'trios': ['trios-1.png'],
+  'vpcs': ['vpcs-1.png', 'vpcs-2.png'],
+  'yale': ['yale-1.png'],
+};
+
+// Define project videos statically
+const projectVideos = {
+  'vpcs': ['vpcs-video-1.mp4']
+};
+
 export async function generateStaticParams() {
   return Object.keys(projectDisplayNames).map((key) => ({
     project: key,
   }));
 }
 
-async function getProjectFiles(projectName) {
-  if (!projectName) return { images: [], videos: [] };
-  const projectDir = path.join(process.cwd(), 'public/portfolio', projectName);
-
-  try {
-    const files = await fs.readdir(projectDir);
-    const filteredFiles = files.filter(file =>
-      !file.startsWith('.') && !file.toLowerCase().includes('thumbnail')
-    );
-
-    const sortedFiles = filteredFiles.sort((a, b) => {
-      const numA = parseInt(a.match(/[-](\d+)(?:\.\w+)?$/)?.[1] || '9999');
-      const numB = parseInt(b.match(/[-](\d+)(?:\.\w+)?$/)?.[1] || '9999');
-      return numA - numB;
-    });
-
-    const images = sortedFiles.filter(file =>
-      file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png') ||
-      (!path.extname(file) && !file.includes('.mp4'))
-    );
-
-    const videos = sortedFiles.filter(file =>
-      file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.mov')
-    );
-
-    return { images, videos };
-  } catch (error) {
-    console.error("Error reading project directory:", error);
-    return { images: [], videos: [] };
-  }
-}
-
 export default async function ProjectPage({ params }) {
   const { project } = await params;
 
-  if (!project) {
-    console.error("Project parameter is undefined");
+  if (!project || !projectDisplayNames[project]) {
     notFound();
     return null;
   }
 
-  const files = await getProjectFiles(project);
-  const displayName = projectDisplayNames[project] || project.replace(/-/g, ' ')
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
+  const images = projectImages[project] || [];
+  const videos = projectVideos[project] || [];
+  const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
 
   return (
@@ -116,23 +111,17 @@ export default async function ProjectPage({ params }) {
         </div>
 
         {/* Image Section */}
-        {files.images && files.images.length > 0 ? (
+        {images.length > 0 ? (
           <div className="space-y-8">
-            {files.images.map((image, index) => {
-              const imagePath = path.extname(image)
-                ? `/portfolio/${project}/${image}`
-                : `/portfolio/${project}/${image}.png`;
-
-              return (
-                <div key={image} className="relative w-full aspect-video">
-                  <img
-                    src={imagePath}
-                    alt={`${displayName} - Image ${index + 1}`}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              );
-            })}
+            {images.map((image, index) => (
+              <div key={image} className="relative w-full aspect-video">
+                <img
+                  src={`/portfolio/${project}/${image}`}
+                  alt={`${displayName} - Image ${index + 1}`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            ))}
           </div>
         ) : (
           <div className="text-center text-gray-500 my-8">
@@ -157,7 +146,7 @@ export default async function ProjectPage({ params }) {
             </div>
 
             <div className="space-y-8">
-              {files.videos.map((video) => (
+              {videos.map((video) => (
                 <div key={video} className="relative w-full aspect-video">
                   <video
                     controls
@@ -171,11 +160,11 @@ export default async function ProjectPage({ params }) {
             </div>
           </div>
         ) : (
-          files.videos && files.videos.length > 0 && (
+          videos.length > 0 && (
             <div className="mt-12">
               <h2 className="text-2xl font-bold mb-6">Videos</h2>
               <div className="space-y-8">
-                {files.videos.map((video) => (
+                {videos.map((video) => (
                   <div key={video} className="relative w-full aspect-video">
                     <video
                       controls
