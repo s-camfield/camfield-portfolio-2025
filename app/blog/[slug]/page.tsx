@@ -1,54 +1,62 @@
-import { groq } from 'next-sanity';
-import { client } from '../../../sanity/lib/client';
-import { PortableText } from '@portabletext/react';
-import Image from 'next/image';
-import Navigation from '../../../components/Navigation';
-import Footer from '../../../components/Footer';
+import { client } from '../../../sanity/lib/client'
+import { groq } from 'next-sanity'
+import { PortableText } from '@portabletext/react'
+import Image from 'next/image'
+import { urlFor } from '../../../sanity/lib/image'
+import { notFound } from 'next/navigation'
 
-export const revalidate = 60;
+// Types
+interface Post {
+  _id: string
+  title: string
+  publishedAt: string
+  mainImage?: { asset: { _ref: string } }
+  body: any[]
+}
 
-const query = groq`
-  *[_type == "post" && slug.current == $slug][0] {
-    title,
-    publishedAt,
-    body,
-    mainImage { asset->{url} }
+// Update the Props interface to make params a Promise
+interface Props {
+  params: Promise<{ slug: string }>
+}
+
+export const revalidate = 60 // Revalidate this page every 60 seconds
+
+export default async function BlogPostPage({ params }: Props) {
+  // Await the params to get the slug
+  const { slug } = await params
+  
+  const post = await client.fetch<Post | null>(
+    groq`*[_type == "post" && slug.current == $slug][0]`,
+    { slug }
+  )
+
+  if (!post) {
+    notFound()
   }
-`;
-
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = await client.fetch(query, { slug: params.slug });
 
   return (
-    <main className="bg-white text-gray-800">
-      <Navigation />
-
-      <article className="container mx-auto px-6 py-16 max-w-3xl">
-        <h1 className="text-4xl font-bold text-[#27bdab] mb-4">{post.title}</h1>
-        <p className="text-gray-500 text-sm mb-6">
-          {new Date(post.publishedAt).toDateString()}
+    <main className="container mx-auto px-4 py-8 max-w-3xl">
+      <article>
+        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+        <p className="text-gray-500 mb-8">
+          {new Date(post.publishedAt).toLocaleDateString()}
         </p>
-
-        {post.mainImage?.asset?.url && (
-          <Image
-            src={post.mainImage.asset.url}
-            alt={post.title}
-            width={800}
-            height={400}
-            className="rounded-lg mb-8"
-          />
+        
+        {post.mainImage && (
+          <div className="relative h-64 w-full mb-8">
+            <Image
+              src={urlFor(post.mainImage).url()}
+              alt={post.title}
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
         )}
-
-        <div className="prose prose-lg max-w-none">
+        
+        <div className="prose max-w-none">
           <PortableText value={post.body} />
         </div>
       </article>
-
-      <Footer />
     </main>
-  );
+  )
 }

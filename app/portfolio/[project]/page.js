@@ -15,7 +15,7 @@ const projectDisplayNames = {
   'ioc': 'Instrument of Change',
   'michigan': 'Michigan Litigator',
   'mike': 'Local Fire',
-  'mohers': 'Moher\'s',
+  'mohers': "Moher's",
   'mugzles': 'Mugzles',
   'soldner': 'Soldner',
   'solid-oak': 'Solid Oak',
@@ -74,7 +74,7 @@ async function getProjectFiles(projectName) {
 }
 
 export default async function ProjectPage({ params }) {
-  const { project } = params;
+  const { project } = await params;
 
   if (!project) {
     console.error("Project parameter is undefined");
@@ -115,6 +115,7 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
+        {/* Image Section */}
         {files.images && files.images.length > 0 ? (
           <div className="space-y-8">
             {files.images.map((image, index) => {
@@ -144,7 +145,6 @@ export default async function ProjectPage({ params }) {
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
 
-            {/* Embedded YouTube Short */}
             <div className="relative w-full aspect-video mb-8">
               <iframe
                 className="w-full h-full rounded"
@@ -156,7 +156,6 @@ export default async function ProjectPage({ params }) {
               ></iframe>
             </div>
 
-            {/* Local videos */}
             <div className="space-y-8">
               {files.videos.map((video) => (
                 <div key={video} className="relative w-full aspect-video">
