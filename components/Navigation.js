@@ -1,107 +1,18 @@
-// components/Navigation.js
-'use client';
+// app/blog-coming-soon/page.js
+import Navigation from '../../components/Navigation';
 
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-
-export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+export default function BlogComingSoon() {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50">
-      {/* Semi-transparent teal background overlay */}
-      <div className="absolute inset-0 bg-[#26bcab] bg-opacity-80 backdrop-blur-sm"></div>
+    <main className="min-h-screen bg-white">
+      <Navigation />
       
-      <div className="container mx-auto relative z-10 p-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="z-50">
-            <Image 
-              src="/camfield-logo-horiz-white.svg" 
-              alt="Camfield Designs" 
-              width={180} 
-              height={90} 
-              className="ml-4" 
-            />
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 text-white">
-            <Link href="/portfolio" className="hover:opacity-80 transition-opacity">
-              PORTFOLIO
-            </Link>
-            <Link href="/photography" className="hover:opacity-80 transition-opacity">
-              PHOTOGRAPHY
-            </Link>
-            <Link href="/about" className="hover:opacity-80 transition-opacity">
-              ABOUT
-            </Link>
-            <Link href="/contact" className="hover:opacity-80 transition-opacity">
-              CONTACT
-            </Link>
-            <Link href="/blog-coming-soon" className="hover:opacity-80 transition-opacity">
-              BLOG
-            </Link>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Image 
-              src="/hamburger-icon.png" 
-              alt="Menu" 
-              width={24} 
-              height={24} 
-            />
-          </button>
-          
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="fixed inset-0 bg-[#26bcab] bg-opacity-95 flex flex-col items-center justify-center md:hidden">
-              <div className="flex flex-col items-center space-y-8 text-white text-xl">
-                <Link 
-                  href="/portfolio" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  PORTFOLIO
-                </Link>
-                <Link 
-                  href="/photography" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  PHOTOGRAPHY
-                </Link>
-                <Link 
-                  href="/about" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  ABOUT
-                </Link>
-                <Link 
-                  href="/contact" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  CONTACT
-                </Link>
-                <Link 
-                  href="/blog-coming-soon" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  BLOG
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+      <div className="container mx-auto pt-32 px-4 pb-16 text-center">
+        <h1 className="text-4xl font-bold mb-6">Blog Coming Soon</h1>
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          We're working on some amazing blog content that will be available soon. 
+          Check back later for updates, insights, and more!
+        </p>
       </div>
-    </nav>
+    </main>
   );
 }
