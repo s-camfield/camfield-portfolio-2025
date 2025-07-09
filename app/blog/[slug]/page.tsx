@@ -1,42 +1,40 @@
-import { client } from '../../../sanity/lib/client'
-import { groq } from 'next-sanity'
-import { PortableText } from '@portabletext/react'
-import Image from 'next/image'
-import { urlFor } from '../../../sanity/lib/image'
-import { notFound } from 'next/navigation'
+// app/blog/[slug]/page.js
+import { client } from '../../../sanity/lib/client';
+import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
+import { urlFor } from '../../../sanity/lib/image';
+import Navigation from '../../../components/Navigation';
+import { notFound } from 'next/navigation';
 
-// Types
-interface Post {
-  _id: string
-  title: string
-  publishedAt: string
-  mainImage?: { asset: { _ref: string } }
-  body: any[]
+export const revalidate = 60; // Revalidate this page every 60 seconds
+
+interface BlogPostPageProps {
+  params: { slug: string };
 }
 
-// Update the Props interface to make params a Promise
-interface Props {
-  params: Promise<{ slug: string }>
-}
-
-export const revalidate = 60 // Revalidate this page every 60 seconds
-
-export default async function BlogPostPage({ params }: Props) {
-  // Await the params to get the slug
-  const { slug } = await params
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
   
-  const post = await client.fetch<Post | null>(
-    groq`*[_type == "post" && slug.current == $slug][0]`,
-    { slug }
-  )
+  let post;
+  
+  try {
+    post = await client.fetch(`*[_type == "post" && slug.current == $slug][0]`, {
+      slug
+    });
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    // Continue with undefined post if there's an error
+  }
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
-    <main className="container mx-auto px-4 py-8 max-w-3xl">
-      <article>
+    <main className="min-h-screen bg-white">
+      <Navigation />
+
+      <article className="container mx-auto pt-32 px-4 pb-16 max-w-3xl">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <p className="text-gray-500 mb-8">
           {new Date(post.publishedAt).toLocaleDateString()}
@@ -58,5 +56,5 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </article>
     </main>
-  )
+  );
 }
