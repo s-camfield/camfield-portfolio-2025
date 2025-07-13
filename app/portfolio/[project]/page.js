@@ -1,7 +1,7 @@
 // app/portfolio/[project]/page.js
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import ProjectImage from '../../../components/ProjectImage';
 
 // Define project display names
 const projectDisplayNames = {
@@ -71,6 +71,13 @@ export default async function ProjectPage({ params }) {
   const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
 
+  // Common image paths to try
+  const commonImagePaths = [
+    `thumbnail.png`,
+    `${project}-1.png`,
+    `${project}-2.png`,
+  ];
+
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
@@ -96,43 +103,25 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section */}
+        {/* Image Section - Using the client component */}
         <div className="space-y-8">
+          {/* Specific images */}
           {images.map((image, index) => (
-            <div key={index} className="relative w-full aspect-video">
-              <img
-                src={`/portfolio/${project}/${image}`}
-                alt={`${displayName} - Image ${index + 1}`}
-                className="w-full h-full object-contain rounded-lg shadow-md"
-              />
-            </div>
+            <ProjectImage
+              key={index}
+              src={`/portfolio/${project}/${image}`}
+              alt={`${displayName} - Image ${index + 1}`}
+            />
           ))}
           
-          {/* If no specific images are defined, try some common patterns */}
-          {images.length === 0 && (
-            <>
-              <div className="relative w-full aspect-video">
-                <img
-                  src={`/portfolio/${project}/thumbnail.png`}
-                  alt={`${displayName} - Thumbnail`}
-                  className="w-full h-full object-contain rounded-lg shadow-md"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-              </div>
-              <div className="relative w-full aspect-video">
-                <img
-                  src={`/portfolio/${project}/${project}-1.png`}
-                  alt={`${displayName} - Image 1`}
-                  className="w-full h-full object-contain rounded-lg shadow-md"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-              </div>
-            </>
-          )}
+          {/* If no specific images are defined, try common patterns */}
+          {images.length === 0 && commonImagePaths.map((imagePath, index) => (
+            <ProjectImage
+              key={index}
+              src={`/portfolio/${project}/${imagePath}`}
+              alt={`${displayName} - Image ${index + 1}`}
+            />
+          ))}
         </div>
 
         {/* Videos Section - YouTube Only */}
