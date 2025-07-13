@@ -15,8 +15,8 @@ const projectDisplayNames = {
   'ioc': 'Instrument of Change',
   'michigan': 'Michigan Litigator',
   'mike': 'Local Fire',
-  'mohers': "Moher's",
-  'mugzle': 'Mugzles', // Note: folder is 'mugzle' not 'mugzles'
+  'moher': "Moher's",
+  'mugzle': 'Mugzles',
   'soldner': 'Soldner',
   'solid-oak': 'Solid Oak',
   'sunshine': 'Sunshine',
@@ -34,6 +34,30 @@ const externalLinks = {
   'vpcs': 'https://www.veteranpcs.com/',
   'total-stone': 'https://total-stone.com/',
   'trios': 'https://www.trioscantina.com/',
+};
+
+// Define project-specific image files based on screenshots
+const projectImages = {
+  '66': ['branding-1.png', 'branding-2.png'],
+  'baca': ['baca-1.png', 'book-4.png', 'book-5.png', 'book-6.png', 'flyer-3.png', 'folder-2.png', 'logo-sign-7.png', 'straight-8.png'],
+  'bayshore': ['bay-shore-branding-01.png', 'bay-shore-branding-02.png', 'bay-shore-branding-03.png', 'bay-shore-branding-04.png', 'bay-shore-branding-05.png'],
+  'castle-rock': ['castle-rock-1.png', 'castle-rock-2.png', 'castle-rock-3.png', 'castle-rock-4.png', 'castle-rock-5.png'],
+  'd-and-c': ['d-c-consulting-branding-01.png', 'd-c-consulting-branding-02.png', 'd-c-consulting-branding-03.png', 'd-c-consulting-branding-04.png', 'd-c-consulting-branding-05.png', 'd-c-consulting-branding-06.png', 'd-c-web-7.png'],
+  'f-up': ['f-up-logo-1.png', 'f-up-logo-2.png'],
+  'find-your-fitness': ['find-your-fitness-1.png'],
+  'ioc': ['ioc-web-2.png', 'ioc-1.png'],
+  'michigan': ['tml-1.png'],
+  'mike': ['fire-1.png', 'fire-3.png', 'troy-fire-4.png', 'warren-fire-2.png'],
+  'moher': ['moher-1.png'],
+  'mugzle': ['mugzle-1.png', 'mugzle-web-3.png', 'web-mug-2.png'],
+  'soldner': ['branding-01.png', 'branding-02.png', 'branding-03.png', 'branding-04.png', 'branding-05.png'],
+  'solid-oak': ['solid-oak-1.png', 'solid-oak-2.png', 'solid-sign-3.png', 'web-4.png'],
+  'sunshine': ['sunshine-chapters-iii-2.png', 'infographic-3.png', 'infographic-4.png', 'infographic-5.png', 'infographic-6.png', 'infographic-7.png', 'sunshine-bh-1.png'],
+  'sweet-roast': ['sr-logo-products-5.png', 'sr-menu-6.png', 'sr-product-7.png', 'sr-product-8.png', 'sw-website-4.png', 'sweet-roast-1.jpg', 'sweet-roast-2.png', 'sweet-roast-logo-3.png'],
+  'total-stone': ['booklet-8.png', 'booklet-9.png', 'total-stone-1.png', 'total-stone-pro-cut-flyer-3.png', 'total-stone-solution-logo-2.png', 'total-stone-website-7.png', 'ts-flyer-6.png', 'ts-flyer-vision-4.png', 'ts-plate-5.png'],
+  'trios': ['trios-branding-3.png', 'trios-logo-1.png', 'trios-logo-2.png', 'trios-logo-4.png', 'trios-menu-5.png', 'trios-menu-6.png', 'trios-menu-7.png'],
+  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'Veteranpcs-flyer-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
+  'yale': ['yale-heating-1.png', 'yale-heating-2.png', 'yale-heating-3.png', 'yale-heating-4.png'],
 };
 
 // Define YouTube videos for each project
@@ -82,10 +106,8 @@ export default async function ProjectPage({ params }) {
 
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
+  const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
-
-  // Generate a range of numbers for image filenames (1-15)
-  const imageNumbers = Array.from({ length: 15 }, (_, i) => i + 1);
 
   return (
     <main className="min-h-screen bg-white">
@@ -112,54 +134,15 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Based on your file structure */}
+        {/* Image Section - Using the client component */}
         <div className="space-y-8">
-          {/* First show the thumbnail */}
-          <ProjectImage
-            src={`/portfolio/${project}/thumbnail.png`}
-            alt={`${displayName} - Thumbnail`}
-          />
-          
-          {/* Special case for total-stone based on your screenshot */}
-          {project === 'total-stone' && (
-            <>
-              <ProjectImage src={`/portfolio/${project}/booklet-08.png`} alt="Total Stone Booklet 08" />
-              <ProjectImage src={`/portfolio/${project}/booklet-09.png`} alt="Total Stone Booklet 09" />
-              <ProjectImage src={`/portfolio/${project}/total-stone-1.png`} alt="Total Stone 1" />
-              <ProjectImage src={`/portfolio/${project}/total-stone-pro-cut-flyer-3.png`} alt="Total Stone Pro Cut Flyer" />
-              <ProjectImage src={`/portfolio/${project}/total-stone-solution-logo-2.png`} alt="Total Stone Solution Logo" />
-              <ProjectImage src={`/portfolio/${project}/total-stone-website-7.png`} alt="Total Stone Website" />
-              <ProjectImage src={`/portfolio/${project}/ts-flyer-6.png`} alt="TS Flyer" />
-              <ProjectImage src={`/portfolio/${project}/ts-flyer-vision-4.png`} alt="TS Flyer Vision" />
-              <ProjectImage src={`/portfolio/${project}/ts-plate-5.png`} alt="TS Plate" />
-            </>
-          )}
-          
-          {/* Then try numbered images (1.png, 2.png, etc.) */}
-          {imageNumbers.map((num) => (
+          {images.map((image, index) => (
             <ProjectImage
-              key={`num-${num}`}
-              src={`/portfolio/${project}/${num}.png`}
-              alt={`${displayName} - Image ${num}`}
+              key={index}
+              src={`/portfolio/${project}/${image}`}
+              alt={`${displayName} - ${image}`}
             />
           ))}
-          
-          {/* Try JPG versions too */}
-          {imageNumbers.map((num) => (
-            <ProjectImage
-              key={`jpg-${num}`}
-              src={`/portfolio/${project}/${num}.jpg`}
-              alt={`${displayName} - Image ${num}`}
-            />
-          ))}
-          
-          {/* Try project-specific naming patterns based on your screenshot */}
-          {project === 'soldner' && (
-            <ProjectImage
-              src={`/portfolio/${project}/branding-03.png`}
-              alt={`${displayName} - Branding`}
-            />
-          )}
         </div>
 
         {/* Videos Section - YouTube Only */}
