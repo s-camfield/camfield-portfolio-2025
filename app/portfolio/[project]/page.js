@@ -36,20 +36,34 @@ const externalLinks = {
   'trios': 'https://www.trioscantina.com/',
 };
 
-// Define project images with specific file paths
-const projectImages = {
-  '66': ['thumbnail.png'],
-  'find-your-fitness': ['thumbnail.png'],
-  'mugzles': ['thumbnail.png'],
-  'soldner': ['branding-03.png'],
-  'total-stone': ['booklet-08.png'],
-  'vpcs': ['vpcs-1.png', 'vpcs-2.png'],
-  // Add other projects with their specific image paths
-};
-
-// Define YouTube videos
+// Define YouTube videos for each project
 const youtubeVideos = {
-  'vpcs': ['https://www.youtube.com/embed/qVCfntkA5bo']
+  'vpcs': [
+    'https://www.youtube.com/embed/qVCfntkA5bo',
+    'https://www.youtube.com/embed/jsBZWp-OIIU',
+    'https://www.youtube.com/embed/o72b7Fd7f6Q',
+    'https://www.youtube.com/embed/aMYEUo-zaE0',
+    'https://www.youtube.com/embed/CYie5dXUk3M',
+    'https://www.youtube.com/embed/f3AzcceIFPo',
+    'https://www.youtube.com/embed/6KLz8AVCF3E',
+    'https://www.youtube.com/embed/w3dTTHgsnME',
+    'https://www.youtube.com/embed/LyT7VNzYndg',
+    'https://www.youtube.com/embed/QEOOzjyG1Go'
+  ],
+  'find-your-fitness': [
+    'https://www.youtube.com/embed/Q7dSJltZQ_k'
+  ],
+  'baca': [
+    'https://www.youtube.com/embed/q8GpyiIjMB0'
+  ],
+  'sweet-roast': [
+    'https://www.youtube.com/embed/Nt_7rNOS608',
+    'https://www.youtube.com/embed/jrXz6RH11H4'
+  ],
+  'total-stone': [
+    'https://www.youtube.com/embed/nzAmGCEWE9w',
+    'https://www.youtube.com/embed/EX4lStlaAfU'
+  ]
 };
 
 export async function generateStaticParams() {
@@ -68,15 +82,10 @@ export default async function ProjectPage({ params }) {
 
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
-  const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
 
-  // Common image paths to try
-  const commonImagePaths = [
-    `thumbnail.png`,
-    `${project}-1.png`,
-    `${project}-2.png`,
-  ];
+  // Generate a range of numbers for image filenames
+  const imageNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
     <main className="min-h-screen bg-white">
@@ -103,23 +112,56 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Using the client component */}
+        {/* Image Section - Try multiple image patterns */}
         <div className="space-y-8">
-          {/* Specific images */}
-          {images.map((image, index) => (
+          {/* Try numbered images (1.png, 2.png, etc.) */}
+          {imageNumbers.map((num) => (
             <ProjectImage
-              key={index}
-              src={`/portfolio/${project}/${image}`}
-              alt={`${displayName} - Image ${index + 1}`}
+              key={`num-${num}`}
+              src={`/portfolio/${project}/${num}.png`}
+              alt={`${displayName} - Image ${num}`}
             />
           ))}
           
-          {/* If no specific images are defined, try common patterns */}
-          {images.length === 0 && commonImagePaths.map((imagePath, index) => (
+          {/* Try project-numbered images (project-1.png, project-2.png, etc.) */}
+          {imageNumbers.map((num) => (
             <ProjectImage
-              key={index}
-              src={`/portfolio/${project}/${imagePath}`}
-              alt={`${displayName} - Image ${index + 1}`}
+              key={`project-${num}`}
+              src={`/portfolio/${project}/${project}-${num}.png`}
+              alt={`${displayName} - Image ${num}`}
+            />
+          ))}
+          
+          {/* Try other common filenames */}
+          <ProjectImage
+            src={`/portfolio/${project}/thumbnail.png`}
+            alt={`${displayName} - Thumbnail`}
+          />
+          
+          <ProjectImage
+            src={`/portfolio/${project}/logo.png`}
+            alt={`${displayName} - Logo`}
+          />
+          
+          <ProjectImage
+            src={`/portfolio/${project}/banner.png`}
+            alt={`${displayName} - Banner`}
+          />
+          
+          {/* Try JPG versions too */}
+          {imageNumbers.map((num) => (
+            <ProjectImage
+              key={`jpg-${num}`}
+              src={`/portfolio/${project}/${num}.jpg`}
+              alt={`${displayName} - Image ${num}`}
+            />
+          ))}
+          
+          {imageNumbers.map((num) => (
+            <ProjectImage
+              key={`project-jpg-${num}`}
+              src={`/portfolio/${project}/${project}-${num}.jpg`}
+              alt={`${displayName} - Image ${num}`}
             />
           ))}
         </div>
@@ -128,18 +170,20 @@ export default async function ProjectPage({ params }) {
         {videos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
-            {videos.map((videoUrl, index) => (
-              <div key={index} className="relative w-full aspect-video mb-8">
-                <iframe
-                  className="w-full h-full rounded"
-                  src={videoUrl}
-                  title={`${displayName} Video ${index + 1}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {videos.map((videoUrl, index) => (
+                <div key={index} className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg shadow-md"
+                    src={videoUrl}
+                    title={`${displayName} Video ${index + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
