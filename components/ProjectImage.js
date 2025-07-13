@@ -1,10 +1,17 @@
 // components/ProjectImage.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ProjectImage({ src, alt }) {
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Reset error state if src changes
+  useEffect(() => {
+    setHasError(false);
+    setIsLoaded(false);
+  }, [src]);
   
   if (hasError) {
     return null;
@@ -15,7 +22,14 @@ export default function ProjectImage({ src, alt }) {
       <img
         src={src}
         alt={alt}
-        onError={() => setHasError(true)}
+        onError={() => {
+          console.log(`Failed to load image: ${src}`);
+          setHasError(true);
+        }}
+        onLoad={() => {
+          console.log(`Successfully loaded image: ${src}`);
+          setIsLoaded(true);
+        }}
         className="w-full h-full object-contain rounded-lg shadow-md"
       />
     </div>

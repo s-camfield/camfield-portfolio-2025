@@ -38,7 +38,9 @@ const externalLinks = {
 
 // Define project-specific image files based on screenshots
 const projectImages = {
+  // Updated based on latest screenshot
   '66': ['branding-1.png', 'branding-2.png'],
+  
   'baca': ['baca-1.png', 'book-4.png', 'book-5.png', 'book-6.png', 'flyer-3.png', 'folder-2.png', 'logo-sign-7.png', 'straight-8.png'],
   'bayshore': ['bay-shore-branding-01.png', 'bay-shore-branding-02.png', 'bay-shore-branding-03.png', 'bay-shore-branding-04.png', 'bay-shore-branding-05.png'],
   'castle-rock': ['castle-rock-1.png', 'castle-rock-2.png', 'castle-rock-3.png', 'castle-rock-4.png', 'castle-rock-5.png'],
@@ -54,9 +56,17 @@ const projectImages = {
   'solid-oak': ['solid-oak-1.png', 'solid-oak-2.png', 'solid-sign-3.png', 'web-4.png'],
   'sunshine': ['sunshine-chapters-iii-2.png', 'infographic-3.png', 'infographic-4.png', 'infographic-5.png', 'infographic-6.png', 'infographic-7.png', 'sunshine-bh-1.png'],
   'sweet-roast': ['sr-logo-products-5.png', 'sr-menu-6.png', 'sr-product-7.png', 'sr-product-8.png', 'sw-website-4.png', 'sweet-roast-1.jpg', 'sweet-roast-2.png', 'sweet-roast-logo-3.png'],
+  
+  // Updated based on latest screenshot
   'total-stone': ['booklet-8.png', 'booklet-9.png', 'total-stone-1.png', 'total-stone-pro-cut-flyer-3.png', 'total-stone-solution-logo-2.png', 'total-stone-website-7.png', 'ts-flyer-6.png', 'ts-flyer-vision-4.png', 'ts-plate-5.png'],
+  
+  // Updated based on latest screenshot
   'trios': ['trios-branding-3.png', 'trios-logo-1.png', 'trios-logo-2.png', 'trios-logo-4.png', 'trios-menu-5.png', 'trios-menu-6.png', 'trios-menu-7.png'],
-  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'Veteranpcs-flyer-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
+  
+  // Updated based on latest screenshot
+  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'veteranpcs-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
+  
+  // Updated based on latest screenshot
   'yale': ['yale-heating-1.png', 'yale-heating-2.png', 'yale-heating-3.png', 'yale-heating-4.png'],
 };
 
@@ -109,6 +119,9 @@ export default async function ProjectPage({ params }) {
   const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
 
+  // For debugging - log the project and available images
+  console.log(`Project: ${project}, Images: ${images.length}`);
+
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
@@ -136,6 +149,7 @@ export default async function ProjectPage({ params }) {
 
         {/* Image Section - Using the client component */}
         <div className="space-y-8">
+          {/* Try all possible image patterns for this project */}
           {images.map((image, index) => (
             <ProjectImage
               key={index}
@@ -143,6 +157,20 @@ export default async function ProjectPage({ params }) {
               alt={`${displayName} - ${image}`}
             />
           ))}
+          
+          {/* If no specific images are found, try some common patterns */}
+          {images.length === 0 && (
+            <>
+              <ProjectImage
+                src={`/portfolio/${project}/${project}-1.png`}
+                alt={`${displayName} - Image 1`}
+              />
+              <ProjectImage
+                src={`/portfolio/${project}/1.png`}
+                alt={`${displayName} - Image 1`}
+              />
+            </>
+          )}
         </div>
 
         {/* Videos Section - YouTube Only */}
