@@ -16,7 +16,7 @@ const projectDisplayNames = {
   'michigan': 'Michigan Litigator',
   'mike': 'Local Fire',
   'mohers': "Moher's",
-  'mugzles': 'Mugzles',
+  'mugzle': 'Mugzles', // Note: folder is 'mugzle' not 'mugzles'
   'soldner': 'Soldner',
   'solid-oak': 'Solid Oak',
   'sunshine': 'Sunshine',
@@ -84,8 +84,8 @@ export default async function ProjectPage({ params }) {
   const externalLink = externalLinks[project];
   const videos = youtubeVideos[project] || [];
 
-  // Generate a range of numbers for image filenames
-  const imageNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+  // Generate a range of numbers for image filenames (1-15)
+  const imageNumbers = Array.from({ length: 15 }, (_, i) => i + 1);
 
   return (
     <main className="min-h-screen bg-white">
@@ -112,9 +112,30 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Try multiple image patterns */}
+        {/* Image Section - Based on your file structure */}
         <div className="space-y-8">
-          {/* Try numbered images (1.png, 2.png, etc.) */}
+          {/* First show the thumbnail */}
+          <ProjectImage
+            src={`/portfolio/${project}/thumbnail.png`}
+            alt={`${displayName} - Thumbnail`}
+          />
+          
+          {/* Special case for total-stone based on your screenshot */}
+          {project === 'total-stone' && (
+            <>
+              <ProjectImage src={`/portfolio/${project}/booklet-08.png`} alt="Total Stone Booklet 08" />
+              <ProjectImage src={`/portfolio/${project}/booklet-09.png`} alt="Total Stone Booklet 09" />
+              <ProjectImage src={`/portfolio/${project}/total-stone-1.png`} alt="Total Stone 1" />
+              <ProjectImage src={`/portfolio/${project}/total-stone-pro-cut-flyer-3.png`} alt="Total Stone Pro Cut Flyer" />
+              <ProjectImage src={`/portfolio/${project}/total-stone-solution-logo-2.png`} alt="Total Stone Solution Logo" />
+              <ProjectImage src={`/portfolio/${project}/total-stone-website-7.png`} alt="Total Stone Website" />
+              <ProjectImage src={`/portfolio/${project}/ts-flyer-6.png`} alt="TS Flyer" />
+              <ProjectImage src={`/portfolio/${project}/ts-flyer-vision-4.png`} alt="TS Flyer Vision" />
+              <ProjectImage src={`/portfolio/${project}/ts-plate-5.png`} alt="TS Plate" />
+            </>
+          )}
+          
+          {/* Then try numbered images (1.png, 2.png, etc.) */}
           {imageNumbers.map((num) => (
             <ProjectImage
               key={`num-${num}`}
@@ -122,31 +143,6 @@ export default async function ProjectPage({ params }) {
               alt={`${displayName} - Image ${num}`}
             />
           ))}
-          
-          {/* Try project-numbered images (project-1.png, project-2.png, etc.) */}
-          {imageNumbers.map((num) => (
-            <ProjectImage
-              key={`project-${num}`}
-              src={`/portfolio/${project}/${project}-${num}.png`}
-              alt={`${displayName} - Image ${num}`}
-            />
-          ))}
-          
-          {/* Try other common filenames */}
-          <ProjectImage
-            src={`/portfolio/${project}/thumbnail.png`}
-            alt={`${displayName} - Thumbnail`}
-          />
-          
-          <ProjectImage
-            src={`/portfolio/${project}/logo.png`}
-            alt={`${displayName} - Logo`}
-          />
-          
-          <ProjectImage
-            src={`/portfolio/${project}/banner.png`}
-            alt={`${displayName} - Banner`}
-          />
           
           {/* Try JPG versions too */}
           {imageNumbers.map((num) => (
@@ -157,13 +153,13 @@ export default async function ProjectPage({ params }) {
             />
           ))}
           
-          {imageNumbers.map((num) => (
+          {/* Try project-specific naming patterns based on your screenshot */}
+          {project === 'soldner' && (
             <ProjectImage
-              key={`project-jpg-${num}`}
-              src={`/portfolio/${project}/${project}-${num}.jpg`}
-              alt={`${displayName} - Image ${num}`}
+              src={`/portfolio/${project}/branding-03.png`}
+              alt={`${displayName} - Branding`}
             />
-          ))}
+          )}
         </div>
 
         {/* Videos Section - YouTube Only */}
