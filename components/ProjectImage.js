@@ -14,6 +14,7 @@ export default function ProjectImage({ src, alt }) {
   }, [src]);
   
   if (hasError) {
+    // Return null to hide the image container completely
     return null;
   }
   
