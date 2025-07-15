@@ -1,8 +1,28 @@
 // app/portfolio/[project]/page.js
+import { promises as fs } from 'fs';
+import path from 'path';
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
 
-// Define project display names
+// --- Helper Function to Get Project Files ---
+// This function runs on the server at build time.
+async function getProjectFiles(projectName) {
+  const projectDir = path.join(process.cwd(), 'public/portfolio', projectName);
+  try {
+    const allFiles = await fs.readdir(projectDir);
+    // Filter out thumbnails and system files (like .DS_Store)
+    const imageFiles = allFiles.filter(file => 
+      !file.startsWith('.') && file.toLowerCase() !== 'thumbnail.png'
+    );
+    return imageFiles;
+  } catch (error) {
+    // If a folder doesn't exist, return an empty array
+    console.error(`Could not read directory for project: ${projectName}`, error);
+    return [];
+  }
+}
+
+// --- Component Data (Stays the same) ---
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
   'baca': 'Baca',
@@ -26,7 +46,6 @@ const projectDisplayNames = {
   'yale': 'Yale',
 };
 
-// Define external links
 const externalLinks = {
   'solid-oak': 'https://solidoakre.com/',
   'd-and-c': 'https://donahuecobbconsulting.com/',
@@ -35,39 +54,6 @@ const externalLinks = {
   'trios': 'https://www.trioscantina.com/',
 };
 
-const projectImages = {
-  // Updated based on actual files
-  '66': ['sixty-1.png', 'sixty-2.png'],
-  
-  'baca': ['baca-1.png', 'book-4.png', 'book-5.png', 'book-6.png', 'flyer-3.png', 'folder-2.png', 'logo-sign-7.png', 'straight-8.png'],
-  'bayshore': ['bay-shore-branding-01.png', 'bay-shore-branding-02.png', 'bay-shore-branding-03.png', 'bay-shore-branding-04.png', 'bay-shore-branding-05.png'],
-  'castle-rock': ['castle-rock-1.png', 'castle-rock-2.png', 'castle-rock-3.png', 'castle-rock-4.png', 'castle-rock-5.png'],
-  'd-and-c': ['d-c-consulting-branding-01.png', 'd-c-consulting-branding-02.png', 'd-c-consulting-branding-03.png', 'd-c-consulting-branding-04.png', 'd-c-consulting-branding-05.png', 'd-c-consulting-branding-06.png', 'd-c-web-7.png'],
-  'f-up': ['f-up-logo-1.png', 'f-up-logo-2.png'],
-  'find-your-fitness': ['find-your-fitness-1.png'],
-  'ioc': ['ioc-web-2.png', 'ioc-1.png'],
-  'michigan': ['tml-1.png'],
-  'mike': ['fire-1.png', 'fire-3.png', 'troy-fire-4.png', 'warren-fire-2.png'],
-  'moher': ['moher-1.png'],
-  'mugzle': ['mugzle-1.png', 'mugzle-web-3.png', 'web-mug-2.png'],
-  'soldner': ['branding-01.png', 'branding-02.png', 'branding-03.png', 'branding-04.png', 'branding-05.png'],
-  'solid-oak': ['solid-oak-1.png', 'solid-oak-2.png', 'solid-sign-3.png', 'web-4.png'],
-  'sunshine': ['sunshine-chapters-iii-2.png', 'infographic-3.png', 'infographic-4.png', 'infographic-5.png', 'infographic-6.png', 'infographic-7.png', 'sunshine-bh-1.png'],
-  'sweet-roast': ['sr-logo-products-5.png', 'sr-menu-6.png', 'sr-product-7.png', 'sr-product-8.png', 'sw-website-4.png', 'sweet-roast-1.jpg', 'sweet-roast-2.png', 'sweet-roast-logo-3.png'],
-  
-  // Updated based on actual files
-  'total-stone': ['booklet-8.png', 'booklet-9.png', 'total-stone-1.png', 'total-stone-pro-cut-flyer-3.png', 'total-stone-solution-logo-2.png', 'total-stone-website-7.png', 'ts-flyer-6.png', 'ts-flyer-vision-4.png', 'ts-plate-5.png'],
-  
-  // Updated based on actual files
-  'trios': ['trios-branding-3.png', 'trios-logo-1.png', 'trios-logo-2.png', 'trios-logo-4.png', 'trios-menu-5.png', 'trios-menu-6.png', 'trios-menu-7.png'],
-  
-  // Updated based on actual files - corrected to match folder name
-  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'Veteranpcs-flyer-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
-  
-  'yale': ['yale-heating-1.png', 'yale-heating-2.png', 'yale-heating-3.png', 'yale-heating-4.png'],
-};
-
-// Define YouTube videos for each project
 const youtubeVideos = {
   'vpcs': [
     'https://www.youtube.com/embed/qVCfntkA5bo',
@@ -97,12 +83,14 @@ const youtubeVideos = {
   ]
 };
 
+// --- Page Generation (Stays the same) ---
 export async function generateStaticParams() {
   return Object.keys(projectDisplayNames).map((key) => ({
     project: key,
   }));
 }
 
+// --- The Page Component ---
 export default async function ProjectPage({ params }) {
   const { project } = await params;
 
@@ -111,10 +99,13 @@ export default async function ProjectPage({ params }) {
     return null;
   }
 
+  // Get the data for the current project
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
-  const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
+  
+  // Dynamically get the image files for this project
+  const images = await getProjectFiles(project);
 
   return (
     <main className="min-h-screen bg-white">
@@ -141,28 +132,17 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Using standard img tags */}
+        {/* Image Section - Now dynamically displays images */}
         <div className="space-y-8">
-          {images.map((image, index) => (
+          {images.map((imageFile, index) => (
             <div key={index} className="relative w-full aspect-video">
               <img
-                src={`/portfolio/${project}/${image}`}
-                alt={`${displayName} - ${image}`}
+                src={`/portfolio/${project}/${imageFile}`}
+                alt={`${displayName} - ${imageFile}`}
                 className="w-full h-full object-contain rounded-lg shadow-md"
               />
             </div>
           ))}
-
-          {/* If no specific images are found, try some common patterns */}
-          {images.length === 0 && (
-            <div className="relative w-full aspect-video">
-              <img
-                src={`/portfolio/${project}/${project}-1.png`}
-                alt={`${displayName} - Image 1`}
-                className="w-full h-full object-contain rounded-lg shadow-md"
-              />
-            </div>
-          )}
         </div>
 
         {/* Videos Section - YouTube Only */}
