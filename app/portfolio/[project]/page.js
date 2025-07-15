@@ -36,10 +36,9 @@ const externalLinks = {
   'trios': 'https://www.trioscantina.com/',
 };
 
-// Define project-specific image files based on screenshots
 const projectImages = {
-  // Updated based on latest screenshot
-  '66': ['branding-1.png', 'branding-2.png'],
+  // Updated based on actual files
+  '66': ['sixty-1.png', 'sixty-2.png'],
   
   'baca': ['baca-1.png', 'book-4.png', 'book-5.png', 'book-6.png', 'flyer-3.png', 'folder-2.png', 'logo-sign-7.png', 'straight-8.png'],
   'bayshore': ['bay-shore-branding-01.png', 'bay-shore-branding-02.png', 'bay-shore-branding-03.png', 'bay-shore-branding-04.png', 'bay-shore-branding-05.png'],
@@ -57,16 +56,15 @@ const projectImages = {
   'sunshine': ['sunshine-chapters-iii-2.png', 'infographic-3.png', 'infographic-4.png', 'infographic-5.png', 'infographic-6.png', 'infographic-7.png', 'sunshine-bh-1.png'],
   'sweet-roast': ['sr-logo-products-5.png', 'sr-menu-6.png', 'sr-product-7.png', 'sr-product-8.png', 'sw-website-4.png', 'sweet-roast-1.jpg', 'sweet-roast-2.png', 'sweet-roast-logo-3.png'],
   
-  // Updated based on latest screenshot
+  // Updated based on actual files
   'total-stone': ['booklet-8.png', 'booklet-9.png', 'total-stone-1.png', 'total-stone-pro-cut-flyer-3.png', 'total-stone-solution-logo-2.png', 'total-stone-website-7.png', 'ts-flyer-6.png', 'ts-flyer-vision-4.png', 'ts-plate-5.png'],
   
-  // Updated based on latest screenshot
+  // Updated based on actual files
   'trios': ['trios-branding-3.png', 'trios-logo-1.png', 'trios-logo-2.png', 'trios-logo-4.png', 'trios-menu-5.png', 'trios-menu-6.png', 'trios-menu-7.png'],
   
-  // Updated based on latest screenshot
-  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'veteranpcs-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
+  // Updated based on actual files - note the capital V in Veteranpcs
+  'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'Veteranpcs-flyer-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
   
-  // Updated based on latest screenshot
   'yale': ['yale-heating-1.png', 'yale-heating-2.png', 'yale-heating-3.png', 'yale-heating-4.png'],
 };
 
