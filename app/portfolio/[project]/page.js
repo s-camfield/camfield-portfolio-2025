@@ -1,7 +1,6 @@
 // app/portfolio/[project]/page.js
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
-import ProjectImage from '../../../components/ProjectImage';
 
 // Define project display names
 const projectDisplayNames = {
@@ -117,9 +116,6 @@ export default async function ProjectPage({ params }) {
   const images = projectImages[project] || [];
   const videos = youtubeVideos[project] || [];
 
-  // For debugging - log the project and available images
-  console.log(`Project: ${project}, Images: ${images.length}`);
-
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
@@ -133,65 +129,42 @@ export default async function ProjectPage({ params }) {
             including the client, the challenge, your approach, and the results.
           </p>
 
-          {externalLink && (
-            <a
-              href={externalLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-blue-600 underline hover:text-blue-800 transition"
-            >
-              View Site →
-            </a>
-          )}
-        </div>
-
-        {/* Image Section - Using the client component */}
-        <div className="space-y-8">
-          {/* Try all possible image patterns for this project */}
-          {images.map((image, index) => (
-            <ProjectImage
-              key={index}
-              src={`/portfolio/${project}/${image}`}
-              alt={`${displayName} - ${image}`}
-            />
-          ))}
-          
-          {/* If no specific images are found, try some common patterns */}
-          {images.length === 0 && (
-            <>
-              <ProjectImage
-                src={`/portfolio/${project}/${project}-1.png`}
-                alt={`${displayName} - Image 1`}
-              />
-              <ProjectImage
-                src={`/portfolio/${project}/1.png`}
-                alt={`${displayName} - Image 1`}
-              />
-            </>
-          )}
-        </div>
-
-        {/* Videos Section - YouTube Only */}
-        {videos.length > 0 && (
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold mb-6">Videos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {videos.map((videoUrl, index) => (
-                <div key={index} className="relative aspect-video">
-                  <iframe
-                    className="w-full h-full rounded-lg shadow-md"
-                    src={videoUrl}
-                    title={`${displayName} Video ${index + 1}`}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+              {externalLink && (
+                <a
+                  href={externalLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 text-blue-600 underline hover:text-blue-800 transition"
+                >
+                  View Site →
+                </a>
+              )}
+            </div>
+    
+            {/* Image Section - Using standard img tags */}
+            <div className="space-y-8">
+              {images.map((image, index) => (
+                <div key={index} className="relative w-full aspect-video">
+                  <img
+                    src={`/portfolio/${project}/${image}`}
+                    alt={`${displayName} - ${image}`}
+                    className="w-full h-full object-contain rounded-lg shadow-md"
+                  />
                 </div>
               ))}
+    
+              {/* If no specific images are found, try some common patterns */}
+              {images.length === 0 && (
+                <div className="relative w-full aspect-video">
+                  <img
+                    src={`/portfolio/${project}/${project}-1.png`}
+                    alt={`${displayName} - Image 1`}
+                    className="w-full h-full object-contain rounded-lg shadow-md"
+                  />
+                </div>
+              )}
             </div>
           </div>
-        )}
-      </div>
-    </main>
-  );
-}
+                </main>
+              );
+        }
