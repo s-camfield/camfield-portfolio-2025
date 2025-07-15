@@ -61,7 +61,7 @@ const projectImages = {
   // Updated based on actual files
   'trios': ['trios-branding-3.png', 'trios-logo-1.png', 'trios-logo-2.png', 'trios-logo-4.png', 'trios-menu-5.png', 'trios-menu-6.png', 'trios-menu-7.png'],
   
-  // Updated based on actual files - note the capital V in Veteranpcs
+  // Updated based on actual files - corrected to match folder name
   'vpcs': ['booklet-6.png', 'booklet-7.png', 'booklet-8.png', 'booklet-9.png', 'booklet-10.png', 'flyer-4.png', 'flyer-5.png', 'socials-4.png', 'Veteranpcs-flyer-flyer-3.png', 'vpcs-branding-2.png', 'vpcs-logo-1.png'],
   
   'yale': ['yale-heating-1.png', 'yale-heating-2.png', 'yale-heating-3.png', 'yale-heating-4.png'],
@@ -129,42 +129,63 @@ export default async function ProjectPage({ params }) {
             including the client, the challenge, your approach, and the results.
           </p>
 
-              {externalLink && (
-                <a
-                  href={externalLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 text-blue-600 underline hover:text-blue-800 transition"
-                >
-                  View Site →
-                </a>
-              )}
+          {externalLink && (
+            <a
+              href={externalLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-blue-600 underline hover:text-blue-800 transition"
+            >
+              View Site →
+            </a>
+          )}
+        </div>
+
+        {/* Image Section - Using standard img tags */}
+        <div className="space-y-8">
+          {images.map((image, index) => (
+            <div key={index} className="relative w-full aspect-video">
+              <img
+                src={`/portfolio/${project}/${image}`}
+                alt={`${displayName} - ${image}`}
+                className="w-full h-full object-contain rounded-lg shadow-md"
+              />
             </div>
-    
-            {/* Image Section - Using standard img tags */}
-            <div className="space-y-8">
-              {images.map((image, index) => (
-                <div key={index} className="relative w-full aspect-video">
-                  <img
-                    src={`/portfolio/${project}/${image}`}
-                    alt={`${displayName} - ${image}`}
-                    className="w-full h-full object-contain rounded-lg shadow-md"
-                  />
+          ))}
+
+          {/* If no specific images are found, try some common patterns */}
+          {images.length === 0 && (
+            <div className="relative w-full aspect-video">
+              <img
+                src={`/portfolio/${project}/${project}-1.png`}
+                alt={`${displayName} - Image 1`}
+                className="w-full h-full object-contain rounded-lg shadow-md"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Videos Section - YouTube Only */}
+        {videos.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Videos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {videos.map((videoUrl, index) => (
+                <div key={index} className="relative aspect-video">
+                  <iframe
+                    className="w-full h-full rounded-lg shadow-md"
+                    src={videoUrl}
+                    title={`${displayName} Video ${index + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               ))}
-    
-              {/* If no specific images are found, try some common patterns */}
-              {images.length === 0 && (
-                <div className="relative w-full aspect-video">
-                  <img
-                    src={`/portfolio/${project}/${project}-1.png`}
-                    alt={`${displayName} - Image 1`}
-                    className="w-full h-full object-contain rounded-lg shadow-md"
-                  />
-                </div>
-              )}
             </div>
           </div>
-                </main>
-              );
-        }
+        )}
+      </div>
+    </main>
+  );
+}
