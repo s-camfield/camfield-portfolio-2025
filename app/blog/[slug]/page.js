@@ -1,26 +1,20 @@
-// app/blog/[slug]/page.js (rename from .tsx to .js)
-import { client } from '../../../sanity/lib/client';
+// app/blog/[slug]/page.js
+import { client } from '../../sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import { urlFor } from '../../../sanity/lib/image';
-import Navigation from '../../../components/Navigation';
+import { urlFor } from '../../sanity/lib/image';
+import Navigation from '../../components/Navigation';
 import { notFound } from 'next/navigation';
+import { portableTextComponents } from '../../lib/portableTextComponents'; // <-- This import is crucial
 
-export const revalidate = 60; // Revalidate this page every 60 seconds
+export const revalidate = 60;
 
 export default async function BlogPostPage({ params }) {
-  // Await the params to get the slug
   const { slug } = await params;
   
-  let post;
-  
-  try {
-    post = await client.fetch(`*[_type == "post" && slug.current == $slug][0]`, {
-      slug
-    });
-  } catch (error) {
-    console.error("Error fetching post:", error);
-  }
+  const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0]`, {
+    slug
+  });
 
   if (!post) {
     notFound();
@@ -29,7 +23,6 @@ export default async function BlogPostPage({ params }) {
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
-
       <article className="container mx-auto pt-32 px-4 pb-16 max-w-3xl">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <p className="text-gray-500 mb-8">
@@ -47,9 +40,12 @@ export default async function BlogPostPage({ params }) {
           </div>
         )}
         
-        {/* Add basic styling directly to the container */}
         <div className="blog-content">
-          <PortableText value={post.body} />
+          {/* This passes our custom components to PortableText */}
+          <PortableText 
+            value={post.body} 
+            components={portableTextComponents} 
+          />
         </div>
       </article>
     </main>

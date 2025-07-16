@@ -1,10 +1,14 @@
-import { type SchemaTypeDefinition } from 'sanity'
-
+// sanity/schemaTypes/index.ts
+import {authorType} from './authorType'
 import {blockContentType} from './blockContentType'
 import {categoryType} from './categoryType'
 import {postType} from './postType'
-import {authorType} from './authorType'
+import {ctaType} from './ctaType' // <-- ADD THIS IMPORT
 
-export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContentType, categoryType, postType, authorType],
-}
+export const schemaTypes = [
+  postType,
+  authorType,
+  categoryType,
+  blockContentType,
+  ctaType, // <-- ADD THIS TO THE ARRAY
+]
