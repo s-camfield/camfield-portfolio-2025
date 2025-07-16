@@ -1,23 +1,21 @@
-// app/blog/page.js (rename from .tsx to .js)
-import Navigation from '../../components/Navigation';
-import { client } from '../../sanity/lib/client';
+// app/blog/page.js
+import Navigation from '../../components/Navigation'; // Correct path
+import { client } from '../../sanity/lib/client'; // Correct path
 import Link from 'next/link';
 import Image from 'next/image';
-import { urlFor } from '../../sanity/lib/image';
+import { urlFor } from '../../sanity/lib/image'; // Correct path
 
-export const revalidate = 60; // Revalidate this page every 60 seconds
+export const revalidate = 60;
 
 export default async function BlogPage() {
   let posts = [];
   
   try {
-    // Try to fetch posts from Sanity
     posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc) {
       _id, title, slug, mainImage, publishedAt
     }`);
   } catch (error) {
     console.error("Error fetching posts:", error);
-    // Continue with empty posts array if there's an error
   }
 
   return (

@@ -1,11 +1,11 @@
 // app/blog/[slug]/page.js
-import { client } from '../../sanity/lib/client';
+import { client } from '../../../sanity/lib/client'; // Corrected path
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import { urlFor } from '../../sanity/lib/image';
-import Navigation from '../../components/Navigation';
+import { urlFor } from '../../../sanity/lib/image'; // Corrected path
+import Navigation from '../../../components/Navigation'; // Corrected path
 import { notFound } from 'next/navigation';
-import { portableTextComponents } from '../../lib/portableTextComponents'; // <-- This import is crucial
+import { portableTextComponents } from '../../../lib/portableTextComponents'; // Corrected path
 
 export const revalidate = 60;
 
@@ -41,7 +41,6 @@ export default async function BlogPostPage({ params }) {
         )}
         
         <div className="blog-content">
-          {/* This passes our custom components to PortableText */}
           <PortableText 
             value={post.body} 
             components={portableTextComponents} 
