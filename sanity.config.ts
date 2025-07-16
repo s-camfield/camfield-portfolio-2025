@@ -1,3 +1,4 @@
+// sanity.config.ts
 'use client'
 
 /**
@@ -10,15 +11,22 @@ import {structureTool} from 'sanity/structure'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
-import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
+
+// --- THIS IS THE LINE THAT FIXES THE ERROR ---
+// We are using curly braces {} to get the named export `schemaTypes`.
+import {schemaTypes} from './sanity/schemaTypes'
 
 export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  
+  // This part is now correct because we imported `schemaTypes` correctly.
+  schema: {
+    types: schemaTypes,
+  },
+
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
