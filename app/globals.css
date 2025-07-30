@@ -167,17 +167,16 @@ body {
   }
 }
 
-/* Mobile hero image adjustments */
-.hero-image-mobile {
-  object-fit: contain;
-  object-position: center bottom;
-  max-height: 80vh;
+/* Mobile hero image adjustments - IMPROVED VERSION */
+.better-mobile-fit {
+  object-fit: cover;
+  object-position: center;
 }
 
-@media (min-width: 640px) {
-  .hero-image-mobile {
+@media (max-width: 640px) {
+  .better-mobile-fit {
     object-fit: cover;
-    object-position: center;
-    max-height: none;
+    object-position: center 30%;
+    transform: scale(1.2);
   }
 }
