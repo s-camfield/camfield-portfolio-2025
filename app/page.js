@@ -8,7 +8,7 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section - With Larger Text */}
+      {/* Hero Section - Matching Reference Images */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image - Mountain Lake */}
         <div className="absolute inset-0 z-0">
@@ -21,12 +21,12 @@ export default function Home() {
           />
         </div>
         
-        {/* Business Name - BEHIND the person, perfectly centered, LARGER SIZE */}
-        <div className="absolute inset-0 z-5 flex flex-col items-center justify-center">
+        {/* Business Name - BEHIND the person, BLACK text, positioned higher */}
+        <div className="absolute inset-0 z-5 flex flex-col items-center justify-center -translate-y-16 md:-translate-y-24">
           <div className="text-center w-full">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold text-[#2FBBAB] tracking-wider">
+            <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-bold text-black tracking-wider">
               <span className="block">CAMFIELD</span>
-              <span className="block -mt-2 sm:-mt-3 md:-mt-5 lg:-mt-6">DESIGNS</span>
+              <span className="block -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8">DESIGNS</span>
             </h1>
           </div>
         </div>
@@ -42,11 +42,11 @@ export default function Home() {
           />
         </div>
         
-        {/* Content Container - Tagline and Button, positioned much lower */}
-        <div className="absolute bottom-24 md:bottom-32 left-0 right-0 z-20">
+        {/* Content Container - Tagline and Button, positioned lower */}
+        <div className="absolute bottom-16 md:bottom-24 left-0 right-0 z-20">
           <div className="container mx-auto px-4 text-center">
             {/* Tagline */}
-            <p className="font-lato text-white text-xl md:text-2xl mb-8 drop-shadow-lg max-w-xl mx-auto text-shadow">
+            <p className="font-lato text-white text-xl md:text-2xl mb-10 drop-shadow-lg max-w-xl mx-auto text-shadow">
               Graphic Design & Branding Since 2014
             </p>
             
@@ -61,7 +61,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rest of your page content remains the same */}
       {/* Scrolling Text Section */}
       <section className="bg-[#26bcab] py-8 overflow-hidden">
         <div className="relative flex overflow-x-hidden">

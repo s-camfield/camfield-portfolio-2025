@@ -151,8 +151,6 @@ body {
   font-size: 0.875rem;
 }
 
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
