@@ -31,13 +31,13 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Person in Red Dress Image - OVER the text */}
+        {/* Person in Red Dress Image - OVER the text, smaller on mobile */}
         <div className="absolute inset-0 z-10">
           <Image
             src="/steph-bg-02.png"
             alt="Stephanie in red dress with mountain backdrop"
             fill
-            style={{ objectFit: 'cover' }}
+            className="hero-image-mobile sm:object-cover"
             priority
           />
         </div>

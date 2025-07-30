@@ -166,3 +166,18 @@ body {
     font-size: 3.5rem;
   }
 }
+
+/* Mobile hero image adjustments */
+.hero-image-mobile {
+  object-fit: contain;
+  object-position: center bottom;
+  max-height: 80vh;
+}
+
+@media (min-width: 640px) {
+  .hero-image-mobile {
+    object-fit: cover;
+    object-position: center;
+    max-height: none;
+  }
+}
