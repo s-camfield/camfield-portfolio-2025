@@ -155,33 +155,10 @@ body {
 @tailwind components;
 @tailwind utilities;
 
-/* Add text shadow to make white text more readable on image backgrounds */
+/* Text shadow for better readability */
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 3.5rem;
-  }
-}
-
-
-/* Mobile image sizing adjustments */
-.mobile-image-size {
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (max-width: 640px) {
-  .mobile-image-size {
-    object-fit: cover;
-    object-position: center 40%;
-    transform: scale(0.8); /* Reduced by 40% from 1.2 */
-  }
-}
-
 
 /* Text color animation */
 @keyframes text-color-animation {
@@ -203,7 +180,7 @@ body {
   animation: text-color-animation 8s infinite;
 }
 
-/* Mobile image adjustments - smaller and lower positioned */
+/* Mobile image adjustments - positioned to align bottom with button */
 .mobile-image-adjust {
   object-fit: cover;
   object-position: center;
@@ -212,7 +189,15 @@ body {
 @media (max-width: 640px) {
   .mobile-image-adjust {
     object-fit: cover;
-    object-position: center 60%; /* Moved lower (was 40%) */
-    transform: scale(0.7); /* Made smaller (was 0.8) */
+    object-position: center bottom; /* Align to bottom */
+    transform: scale(0.7); /* Keep the same scale */
+    transform-origin: center bottom; /* Transform from bottom center */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3.5rem;
   }
 }
