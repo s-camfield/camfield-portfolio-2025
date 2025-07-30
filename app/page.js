@@ -31,13 +31,13 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Person in Red Dress Image - OVER the text, better sized on mobile */}
+        {/* Person in Red Dress Image - OVER the text, properly sized on mobile */}
         <div className="absolute inset-0 z-10">
           <Image
             src="/steph-bg-02.png"
             alt="Stephanie in red dress with mountain backdrop"
             fill
-            className="better-mobile-fit"
+            className="mobile-image-size"
             priority
           />
         </div>
