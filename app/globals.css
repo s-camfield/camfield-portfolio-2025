@@ -182,6 +182,7 @@ body {
   }
 }
 
+
 /* Text color animation */
 @keyframes text-color-animation {
   0%, 100% {
@@ -202,16 +203,16 @@ body {
   animation: text-color-animation 8s infinite;
 }
 
-/* Keep your existing mobile image sizing adjustments */
-.mobile-image-size {
+/* Mobile image adjustments - smaller and lower positioned */
+.mobile-image-adjust {
   object-fit: cover;
   object-position: center;
 }
 
 @media (max-width: 640px) {
-  .mobile-image-size {
+  .mobile-image-adjust {
     object-fit: cover;
-    object-position: center 40%;
-    transform: scale(0.8);
+    object-position: center 60%; /* Moved lower (was 40%) */
+    transform: scale(0.7); /* Made smaller (was 0.8) */
   }
 }
