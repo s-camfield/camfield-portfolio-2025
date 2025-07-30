@@ -8,15 +8,15 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section - With Animated Text */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Shorter on Mobile */}
+      <section className="relative mobile-hero-height flex items-center justify-center overflow-hidden">
         {/* Background Image - Mountain Lake */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/steph-bg-01.png"
             alt="Mountain landscape background"
             fill
-            style={{ objectFit: 'cover' }}
+            className="mobile-bg-position"
             priority
           />
         </div>
@@ -43,10 +43,10 @@ export default function Home() {
         </div>
         
         {/* Content Container - Tagline and Button, positioned lower */}
-        <div className="absolute bottom-16 md:bottom-24 left-0 right-0 z-20">
+        <div className="absolute bottom-8 md:bottom-24 left-0 right-0 z-20">
           <div className="container mx-auto px-4 text-center">
             {/* Tagline */}
-            <p className="font-lato text-white text-xl md:text-2xl mb-10 drop-shadow-lg max-w-xl mx-auto text-shadow">
+            <p className="font-lato text-white text-xl md:text-2xl mb-6 md:mb-10 drop-shadow-lg max-w-xl mx-auto text-shadow">
               Graphic Design & Branding Since 2014
             </p>
             
@@ -201,4 +201,3 @@ export default function Home() {
     </main>
   );
 }
-

@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -31,7 +33,76 @@ body {
   }
 }
 
+/* Text shadow for better readability */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Text color animation */
+@keyframes text-color-animation {
+  0%, 100% {
+    color: #2FBBAB;
+  }
+  25% {
+    color: #4EBD94;
+  }
+  50% {
+    color: #C3CC99;
+  }
+  75% {
+    color: #FFFFFF;
+  }
+}
+
+.animate-text-color {
+  animation: text-color-animation 8s infinite;
+}
+
+/* Mobile hero section height adjustment */
+.mobile-hero-height {
+  height: 100vh;
+}
+
+@media (max-width: 640px) {
+  .mobile-hero-height {
+    height: 85vh; /* Make hero section shorter on mobile */
+  }
+}
+
+/* Mobile background image positioning */
+.mobile-bg-position {
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 640px) {
+  .mobile-bg-position {
+    object-fit: cover;
+    object-position: center 65%; /* Move focus point down to show less mountain top */
+  }
+}
+
+/* Mobile image adjustments - positioned to align bottom with button */
+.mobile-image-adjust {
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 640px) {
+  .mobile-image-adjust {
+    object-fit: cover;
+    object-position: center bottom; /* Align to bottom */
+    transform: scale(0.7); /* Keep the same scale */
+    transform-origin: center bottom; /* Transform from bottom center */
+  }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
   nav.flex {
     flex-direction: column;
     gap: 1rem;
@@ -66,7 +137,6 @@ body {
 .animate-scrollPortfolio {
   animation: scrollPortfolio 15s linear infinite;
 }
-/* Add this to your globals.css file */
 
 /* Blog content styling */
 .blog-content h1 {
@@ -149,55 +219,4 @@ body {
   padding: 0.125rem 0.25rem;
   font-family: monospace;
   font-size: 0.875rem;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Text shadow for better readability */
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* Text color animation */
-@keyframes text-color-animation {
-  0%, 100% {
-    color: #2FBBAB;
-  }
-  25% {
-    color: #4EBD94;
-  }
-  50% {
-    color: #C3CC99;
-  }
-  75% {
-    color: #FFFFFF;
-  }
-}
-
-.animate-text-color {
-  animation: text-color-animation 8s infinite;
-}
-
-/* Mobile image adjustments - positioned to align bottom with button */
-.mobile-image-adjust {
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (max-width: 640px) {
-  .mobile-image-adjust {
-    object-fit: cover;
-    object-position: center bottom; /* Align to bottom */
-    transform: scale(0.7); /* Keep the same scale */
-    transform-origin: center bottom; /* Transform from bottom center */
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 3.5rem;
-  }
 }
