@@ -8,19 +8,60 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative h-screen">
+      {/* Hero Section - With Larger Text */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image - Mountain Lake */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/field-hero-bk.png"
-            alt="Camfield Designs Hero"
+            src="/steph-bg-01.png"
+            alt="Mountain landscape background"
             fill
             style={{ objectFit: 'cover' }}
             priority
           />
         </div>
+        
+        {/* Business Name - BEHIND the person, perfectly centered, LARGER SIZE */}
+        <div className="absolute inset-0 z-5 flex flex-col items-center justify-center">
+          <div className="text-center w-full">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold text-[#2FBBAB] tracking-wider">
+              <span className="block">CAMFIELD</span>
+              <span className="block -mt-2 sm:-mt-3 md:-mt-5 lg:-mt-6">DESIGNS</span>
+            </h1>
+          </div>
+        </div>
+        
+        {/* Person in Red Dress Image - OVER the text */}
+        <div className="absolute inset-0 z-10">
+          <Image
+            src="/steph-bg-02.png"
+            alt="Stephanie in red dress with mountain backdrop"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </div>
+        
+        {/* Content Container - Tagline and Button, positioned much lower */}
+        <div className="absolute bottom-24 md:bottom-32 left-0 right-0 z-20">
+          <div className="container mx-auto px-4 text-center">
+            {/* Tagline */}
+            <p className="font-lato text-white text-xl md:text-2xl mb-8 drop-shadow-lg max-w-xl mx-auto text-shadow">
+              Graphic Design & Branding Since 2014
+            </p>
+            
+            {/* CTA Button */}
+            <Link 
+              href="/portfolio" 
+              className="inline-block bg-[#2FBBAB] hover:bg-[#1e9d90] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 text-lg"
+            >
+              EXPLORE MY WORK →
+            </Link>
+          </div>
+        </div>
       </section>
 
+      {/* Rest of your page content remains the same */}
       {/* Scrolling Text Section */}
       <section className="bg-[#26bcab] py-8 overflow-hidden">
         <div className="relative flex overflow-x-hidden">
@@ -123,10 +164,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Creating a business that flows <span className="italic" style={{ fontFamily: 'cursive' }}>effortlessly</span>
+                Creating a business that flows <span className="italic font-dancing-script">effortlessly</span>
               </h2>
               <p className="text-white text-lg md:text-xl mb-8">
-                For ambitious, passionate entrepreneur&apos;s ready to elevate their brand and website to the next level
+                For ambitious, passionate entrepreneur's ready to elevate their brand and website to the next level
               </p>
               <div className="flex space-x-4 mt-8">
                 {[

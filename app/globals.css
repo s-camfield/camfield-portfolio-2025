@@ -150,3 +150,21 @@ body {
   font-family: monospace;
   font-size: 0.875rem;
 }
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add text shadow to make white text more readable on image backgrounds */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
