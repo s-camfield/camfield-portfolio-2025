@@ -12,6 +12,7 @@ module.exports = {
         'marquee': 'marquee 30s linear infinite',
         'marquee2': 'marquee2 30s linear infinite',
         'scrollPortfolio': 'scrollPortfolio 15s linear infinite',
+        'text-color': 'text-color-animation 8s infinite',
       },
       // Define keyframes to match your CSS
       keyframes: {
@@ -26,6 +27,12 @@ module.exports = {
         scrollPortfolio: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        'text-color-animation': {
+          '0%, 100%': { color: '#2FBBAB' },
+          '25%': { color: '#4EBD94' },
+          '50%': { color: '#C3CC99' },
+          '75%': { color: '#FFFFFF' },
         },
       },
       // Add custom colors for your brand

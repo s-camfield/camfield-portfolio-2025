@@ -8,7 +8,7 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section - Matching Reference Images */}
+      {/* Hero Section - With Animated Text */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image - Mountain Lake */}
         <div className="absolute inset-0 z-0">
@@ -21,10 +21,10 @@ export default function Home() {
           />
         </div>
         
-        {/* Business Name - BEHIND the person, BLACK text, positioned higher */}
+        {/* Business Name - BEHIND the person, ANIMATED text, positioned higher */}
         <div className="absolute inset-0 z-5 flex flex-col items-center justify-center -translate-y-16 md:-translate-y-24">
           <div className="text-center w-full">
-            <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-bold text-black tracking-wider">
+            <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-bold tracking-wider animate-text-color">
               <span className="block">CAMFIELD</span>
               <span className="block -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8">DESIGNS</span>
             </h1>

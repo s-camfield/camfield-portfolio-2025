@@ -181,3 +181,37 @@ body {
     transform: scale(0.8); /* Reduced by 40% from 1.2 */
   }
 }
+
+/* Text color animation */
+@keyframes text-color-animation {
+  0%, 100% {
+    color: #2FBBAB;
+  }
+  25% {
+    color: #4EBD94;
+  }
+  50% {
+    color: #C3CC99;
+  }
+  75% {
+    color: #FFFFFF;
+  }
+}
+
+.animate-text-color {
+  animation: text-color-animation 8s infinite;
+}
+
+/* Keep your existing mobile image sizing adjustments */
+.mobile-image-size {
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 640px) {
+  .mobile-image-size {
+    object-fit: cover;
+    object-position: center 40%;
+    transform: scale(0.8);
+  }
+}
