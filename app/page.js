@@ -8,58 +8,59 @@ export default function Home() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section - Shorter on Mobile */}
-      <section className="relative mobile-hero-height flex items-center justify-center overflow-hidden">
-        {/* Background Image - Mountain Lake */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/steph-bg-01.png"
-            alt="Mountain landscape background"
-            fill
-            className="mobile-bg-position"
-            priority
-          />
-        </div>
-        
-        {/* Business Name - BEHIND the person, ANIMATED text, positioned higher */}
-        <div className="absolute inset-0 z-5 flex flex-col items-center justify-center -translate-y-16 md:-translate-y-24">
-          <div className="text-center w-full">
-            <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-bold tracking-wider animate-text-color">
-              <span className="block">CAMFIELD</span>
-              <span className="block -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8">DESIGNS</span>
-            </h1>
-          </div>
-        </div>
-        
-        {/* Person in Red Dress Image - OVER the text, aligned to bottom on mobile */}
-        <div className="absolute inset-0 z-10">
-          <Image
-            src="/steph-bg-02.png"
-            alt="Stephanie in red dress with mountain backdrop"
-            fill
-            className="mobile-image-adjust"
-            priority
-          />
-        </div>
-        
-        {/* Content Container - Tagline and Button, positioned lower */}
-        <div className="absolute bottom-8 md:bottom-24 left-0 right-0 z-20">
-          <div className="container mx-auto px-4 text-center">
-            {/* Tagline */}
-            <p className="font-lato text-white text-xl md:text-2xl mb-6 md:mb-10 drop-shadow-lg max-w-xl mx-auto text-shadow">
-              Graphic Design & Branding Since 2014
-            </p>
-            
-            {/* CTA Button */}
-            <Link 
-              href="/portfolio" 
-              className="inline-block bg-[#2FBBAB] hover:bg-[#1e9d90] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 text-lg"
-            >
-              EXPLORE MY WORK →
-            </Link>
-          </div>
-        </div>
-      </section>
+     {/* Hero Section - Shorter on Mobile */}
+<section className="relative mobile-hero-height flex items-center justify-center overflow-hidden">
+  {/* Background Image - Mountain Lake */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/steph-bg-01.png"
+      alt="Mountain landscape background"
+      fill
+      className="mobile-bg-position"
+      priority
+    />
+  </div>
+
+  {/* Business Name - BEHIND the person, ANIMATED text, positioned higher */}
+  <div className="absolute inset-0 z-5 flex flex-col items-center justify-center -translate-y-12 md:-translate-y-8 lg:-translate-y-4 xl:translate-y-0">
+    <div className="text-center w-full">
+      <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-bold tracking-wider animate-text-color">
+        <span className="block">CAMFIELD</span>
+        <span className="block -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8">DESIGNS</span>
+      </h1>
+    </div>
+  </div>
+
+  {/* Person in Red Dress Image - OVER the text, aligned to bottom on mobile */}
+  <div className="absolute inset-0 z-10">
+    <Image
+      src="/steph-bg-02.png"
+      alt="Stephanie in red dress with mountain backdrop"
+      fill
+      className="mobile-image-adjust"
+      priority
+    />
+  </div>
+
+  {/* Content Container - Tagline and Button, positioned lower */}
+  <div className="absolute bottom-8 md:bottom-24 left-0 right-0 z-20">
+    <div className="container mx-auto px-4 text-center">
+      {/* Tagline */}
+      <p className="font-lato text-white text-xl md:text-2xl mb-6 md:mb-10 drop-shadow-lg max-w-xl mx-auto text-shadow">
+        Graphic Design & Branding Since 2014
+      </p>
+
+      {/* CTA Button */}
+      <Link 
+        href="/portfolio" 
+        className="inline-block bg-[#2FBBAB] hover:bg-[#1e9d90] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 text-lg"
+      >
+        EXPLORE MY WORK →
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       {/* Scrolling Text Section */}
       <section className="bg-[#26bcab] py-8 overflow-hidden">
