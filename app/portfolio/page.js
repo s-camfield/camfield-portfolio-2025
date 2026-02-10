@@ -27,6 +27,9 @@ const projects = [
   'yale',
   'castle-rock',
   'solid-oak',
+
+  // ✅ NEW PROJECT
+  'troy-fire',
 ];
 
 // Custom display names for projects
@@ -51,15 +54,18 @@ const projectDisplayNames = {
   'yale': 'Yale',
   'castle-rock': 'Castle Rock',
   'solid-oak': 'Solid Oak',
+
+  // ✅ NEW DISPLAY NAME
+  'troy-fire': 'Troy Fire',
 };
 
 // Project card component with hover state
 function ProjectCard({ project, displayName }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
-    <Link 
-      href={`/portfolio/${project}`} 
+    <Link
+      href={`/portfolio/${project}`}
       className="block relative overflow-hidden rounded-lg shadow-lg aspect-square"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -71,22 +77,22 @@ function ProjectCard({ project, displayName }) {
           alt={displayName}
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out"
           style={{
-            transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
           }}
         />
       </div>
-      
+
       {/* Teal overlay with project name */}
-      <div 
+      <div
         className="absolute inset-0 flex items-center justify-center transition-all duration-300"
         style={{
-          backgroundColor: isHovered ? 'rgba(38, 188, 171, 0.8)' : 'rgba(38, 188, 171, 0)'
+          backgroundColor: isHovered ? 'rgba(38, 188, 171, 0.8)' : 'rgba(38, 188, 171, 0)',
         }}
       >
-        <h3 
+        <h3
           className="text-white text-xl md:text-2xl font-bold px-4 text-center transition-opacity duration-300"
           style={{
-            opacity: isHovered ? 1 : 0
+            opacity: isHovered ? 1 : 0,
           }}
         >
           {displayName}
@@ -100,24 +106,21 @@ export default function Portfolio() {
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
-      
+
       <div className="container mx-auto pt-32 px-4 pb-16">
         <h1 className="text-4xl font-bold mb-12 text-center">Portfolio</h1>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => {
-            const displayName = projectDisplayNames[project] || project.replace(/-/g, ' ')
-              .split(' ')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ');
-              
-            return (
-              <ProjectCard 
-                key={project} 
-                project={project} 
-                displayName={displayName} 
-              />
-            );
+            const displayName =
+              projectDisplayNames[project] ||
+              project
+                .replace(/-/g, ' ')
+                .split(' ')
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            return <ProjectCard key={project} project={project} displayName={displayName} />;
           })}
         </div>
       </div>

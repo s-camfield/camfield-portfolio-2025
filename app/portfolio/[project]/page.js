@@ -5,24 +5,30 @@ import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
 
 // --- Helper Function to Get Project Files ---
-// This function runs on the server at build time.
+// Reads images from /public/portfolio/{projectName} at runtime/build time (server-only).
 async function getProjectFiles(projectName) {
   const projectDir = path.join(process.cwd(), 'public/portfolio', projectName);
+
   try {
     const allFiles = await fs.readdir(projectDir);
-    // Filter out thumbnails and system files (like .DS_Store)
-    const imageFiles = allFiles.filter(file => 
-      !file.startsWith('.') && file.toLowerCase() !== 'thumbnail.png'
-    );
+
+    // Keep only image files (no thumbnail, no hidden files, no weird system files)
+    const imageFiles = allFiles
+      .filter((file) => !file.startsWith('.'))
+      .filter((file) => file.toLowerCase() !== 'thumbnail.png')
+      .filter((file) => /\.(png|jpe?g|webp|gif|svg)$/i.test(file));
+
+    // Optional: sort so the order is consistent (especially for 01,02,03 naming)
+    imageFiles.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
     return imageFiles;
   } catch (error) {
-    // If a folder doesn't exist, return an empty array
-    console.error(`Could not read directory for project: ${projectName}`, error);
-    return [];
+    // Directory doesn't exist (or other FS error)
+    return null;
   }
 }
 
-// --- Component Data (Stays the same) ---
+// --- Display Names ---
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
   'baca': 'Baca',
@@ -44,6 +50,9 @@ const projectDisplayNames = {
   'trios': 'Trios',
   'vpcs': 'VeteranPCS',
   'yale': 'Yale',
+
+  // ✅ NEW
+  'troy-fire': 'Troy Fire',
 };
 
 const externalLinks = {
@@ -55,7 +64,7 @@ const externalLinks = {
 };
 
 const youtubeVideos = {
-  'vpcs': [
+  vpcs: [
     'https://www.youtube.com/embed/qVCfntkA5bo',
     'https://www.youtube.com/embed/jsBZWp-OIIU',
     'https://www.youtube.com/embed/o72b7Fd7f6Q',
@@ -65,47 +74,44 @@ const youtubeVideos = {
     'https://www.youtube.com/embed/6KLz8AVCF3E',
     'https://www.youtube.com/embed/w3dTTHgsnME',
     'https://www.youtube.com/embed/LyT7VNzYndg',
-    'https://www.youtube.com/embed/QEOOzjyG1Go'
+    'https://www.youtube.com/embed/QEOOzjyG1Go',
   ],
-  'find-your-fitness': [
-    'https://www.youtube.com/embed/Q7dSJltZQ_k'
-  ],
-  'baca': [
-    'https://www.youtube.com/embed/q8GpyiIjMB0'
-  ],
+  'find-your-fitness': ['https://www.youtube.com/embed/Q7dSJltZQ_k'],
+  baca: ['https://www.youtube.com/embed/q8GpyiIjMB0'],
   'sweet-roast': [
     'https://www.youtube.com/embed/Nt_7rNOS608',
-    'https://www.youtube.com/embed/jrXz6RH11H4'
+    'https://www.youtube.com/embed/jrXz6RH11H4',
   ],
   'total-stone': [
     'https://www.youtube.com/embed/nzAmGCEWE9w',
-    'https://www.youtube.com/embed/EX4lStlaAfU'
-  ]
+    'https://www.youtube.com/embed/EX4lStlaAfU',
+  ],
 };
 
-// --- Page Generation (Stays the same) ---
+// --- Static Generation ---
 export async function generateStaticParams() {
-  return Object.keys(projectDisplayNames).map((key) => ({
-    project: key,
-  }));
+  return Object.keys(projectDisplayNames).map((key) => ({ project: key }));
 }
 
 // --- The Page Component ---
 export default async function ProjectPage({ params }) {
   const { project } = await params;
 
+  // Validate project slug
   if (!project || !projectDisplayNames[project]) {
     notFound();
-    return null;
   }
 
-  // Get the data for the current project
   const displayName = projectDisplayNames[project];
   const externalLink = externalLinks[project];
   const videos = youtubeVideos[project] || [];
-  
-  // Dynamically get the image files for this project
+
   const images = await getProjectFiles(project);
+
+  // If folder doesn't exist (or no images), treat as 404
+  if (!images || images.length === 0) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -132,26 +138,27 @@ export default async function ProjectPage({ params }) {
           )}
         </div>
 
-        {/* Image Section - Now dynamically displays images */}
+        {/* Images */}
         <div className="space-y-8">
-          {images.map((imageFile, index) => (
-            <div key={index} className="relative w-full aspect-video">
+          {images.map((imageFile) => (
+            <div key={imageFile} className="relative w-full">
               <img
                 src={`/portfolio/${project}/${imageFile}`}
                 alt={`${displayName} - ${imageFile}`}
-                className="w-full h-full object-contain rounded-lg shadow-md"
+                className="w-full h-auto object-contain rounded-lg shadow-md"
+                loading="lazy"
               />
             </div>
           ))}
         </div>
 
-        {/* Videos Section - YouTube Only */}
+        {/* Videos */}
         {videos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {videos.map((videoUrl, index) => (
-                <div key={index} className="relative aspect-video">
+                <div key={videoUrl} className="relative aspect-video">
                   <iframe
                     className="w-full h-full rounded-lg shadow-md"
                     src={videoUrl}
@@ -159,7 +166,7 @@ export default async function ProjectPage({ params }) {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                  ></iframe>
+                  />
                 </div>
               ))}
             </div>
