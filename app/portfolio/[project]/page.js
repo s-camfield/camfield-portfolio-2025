@@ -1,34 +1,40 @@
-// app/portfolio/[project]/page.js
 import { promises as fs } from 'fs';
 import path from 'path';
 import Navigation from '../../../components/Navigation';
 import { notFound } from 'next/navigation';
+import PdfLightboxGallery from '../../../components/PdfLightboxGallery';
 
-// --- Helper Function to Get Project Files ---
-// Reads images from /public/portfolio/{projectName} at runtime/build time (server-only).
+// --- Helper: read files in /public/portfolio/[project] ---
 async function getProjectFiles(projectName) {
-  const projectDir = path.join(process.cwd(), 'public/portfolio', projectName);
+  const projectDir = path.join(process.cwd(), 'public', 'portfolio', projectName);
 
   try {
     const allFiles = await fs.readdir(projectDir);
 
-    // Keep only image files (no thumbnail, no hidden files, no weird system files)
-    const imageFiles = allFiles
-      .filter((file) => !file.startsWith('.'))
-      .filter((file) => file.toLowerCase() !== 'thumbnail.png')
-      .filter((file) => /\.(png|jpe?g|webp|gif|svg)$/i.test(file));
+    // Filter out system files + thumbnails (any extension)
+    const cleaned = allFiles.filter((file) => {
+      const lower = file.toLowerCase();
+      if (lower.startsWith('.')) return false;
+      if (lower === 'thumbnail.png' || lower === 'thumbnail.jpg' || lower === 'thumbnail.jpeg' || lower === 'thumbnail.webp') return false;
+      return true;
+    });
 
-    // Optional: sort so the order is consistent (especially for 01,02,03 naming)
-    imageFiles.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    // Separate images + PDFs
+    const imageFiles = cleaned.filter((f) => /\.(png|jpg|jpeg|webp|gif)$/i.test(f));
+    const pdfFiles = cleaned.filter((f) => /\.pdf$/i.test(f));
 
-    return imageFiles;
+    // Keep it stable + predictable
+    imageFiles.sort((a, b) => a.localeCompare(b));
+    pdfFiles.sort((a, b) => a.localeCompare(b));
+
+    return { imageFiles, pdfFiles };
   } catch (error) {
-    // Directory doesn't exist (or other FS error)
-    return null;
+    console.error(`Could not read directory for project: ${projectName}`, error);
+    return { imageFiles: [], pdfFiles: [] };
   }
 }
 
-// --- Display Names ---
+// --- Your project display names ---
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
   'baca': 'Baca',
@@ -37,6 +43,7 @@ const projectDisplayNames = {
   'd-and-c': 'D & C',
   'f-up': 'F-Up',
   'find-your-fitness': 'Find Your Fitness',
+  'general-inspection': 'General Inspection', // ✅ NEW
   'ioc': 'Instrument of Change',
   'michigan': 'Michigan Litigator',
   'mike': 'Local Fire',
@@ -50,9 +57,6 @@ const projectDisplayNames = {
   'trios': 'Trios',
   'vpcs': 'VeteranPCS',
   'yale': 'Yale',
-
-  // ✅ NEW
-  'troy-fire': 'Troy Fire',
 };
 
 const externalLinks = {
@@ -64,7 +68,7 @@ const externalLinks = {
 };
 
 const youtubeVideos = {
-  vpcs: [
+  'vpcs': [
     'https://www.youtube.com/embed/qVCfntkA5bo',
     'https://www.youtube.com/embed/jsBZWp-OIIU',
     'https://www.youtube.com/embed/o72b7Fd7f6Q',
@@ -77,27 +81,24 @@ const youtubeVideos = {
     'https://www.youtube.com/embed/QEOOzjyG1Go',
   ],
   'find-your-fitness': ['https://www.youtube.com/embed/Q7dSJltZQ_k'],
-  baca: ['https://www.youtube.com/embed/q8GpyiIjMB0'],
-  'sweet-roast': [
-    'https://www.youtube.com/embed/Nt_7rNOS608',
-    'https://www.youtube.com/embed/jrXz6RH11H4',
-  ],
-  'total-stone': [
-    'https://www.youtube.com/embed/nzAmGCEWE9w',
-    'https://www.youtube.com/embed/EX4lStlaAfU',
-  ],
+  'baca': ['https://www.youtube.com/embed/q8GpyiIjMB0'],
+  'sweet-roast': ['https://www.youtube.com/embed/Nt_7rNOS608', 'https://www.youtube.com/embed/jrXz6RH11H4'],
+  'total-stone': ['https://www.youtube.com/embed/nzAmGCEWE9w', 'https://www.youtube.com/embed/EX4lStlaAfU'],
+
+  // ✅ NEW: General Inspection video (watch?v=... -> embed/...)
+  'general-inspection': ['https://www.youtube.com/embed/tGsO9UTvWgA'],
 };
 
-// --- Static Generation ---
 export async function generateStaticParams() {
-  return Object.keys(projectDisplayNames).map((key) => ({ project: key }));
+  return Object.keys(projectDisplayNames).map((key) => ({
+    project: key,
+  }));
 }
 
-// --- The Page Component ---
 export default async function ProjectPage({ params }) {
+  // ✅ Next.js wants params awaited in newer versions
   const { project } = await params;
 
-  // Validate project slug
   if (!project || !projectDisplayNames[project]) {
     notFound();
   }
@@ -106,12 +107,7 @@ export default async function ProjectPage({ params }) {
   const externalLink = externalLinks[project];
   const videos = youtubeVideos[project] || [];
 
-  const images = await getProjectFiles(project);
-
-  // If folder doesn't exist (or no images), treat as 404
-  if (!images || images.length === 0) {
-    notFound();
-  }
+  const { imageFiles, pdfFiles } = await getProjectFiles(project);
 
   return (
     <main className="min-h-screen bg-white">
@@ -139,20 +135,28 @@ export default async function ProjectPage({ params }) {
         </div>
 
         {/* Images */}
-        <div className="space-y-8">
-          {images.map((imageFile) => (
-            <div key={imageFile} className="relative w-full">
-              <img
-                src={`/portfolio/${project}/${imageFile}`}
-                alt={`${displayName} - ${imageFile}`}
-                className="w-full h-auto object-contain rounded-lg shadow-md"
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
+        {imageFiles.length > 0 && (
+          <div className="space-y-8">
+            {imageFiles.map((imageFile) => (
+              <div key={imageFile} className="relative w-full aspect-video">
+                <img
+                  src={`/portfolio/${project}/${imageFile}`}
+                  alt={`${displayName} - ${imageFile}`}
+                  className="w-full h-full object-contain rounded-lg shadow-md"
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* Videos */}
+        {/* PDFs in Lightbox */}
+        <PdfLightboxGallery
+          pdfFiles={pdfFiles}
+          project={project}
+          displayName={displayName}
+        />
+
+        {/* YouTube Videos */}
         {videos.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold mb-6">Videos</h2>

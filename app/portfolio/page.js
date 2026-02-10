@@ -1,11 +1,10 @@
-// app/portfolio/page.js
-'use client'; // This marks it as a client component
+'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
-import Navigation from '../../components/Navigation';
+import Navigation from '../components/Navigation';
 
-// Hardcoded project list
+// ✅ Add / remove slugs here (folder names inside /public/portfolio/<slug>/thumbnail.png)
 const projects = [
   '66',
   'baca',
@@ -28,35 +27,37 @@ const projects = [
   'castle-rock',
   'solid-oak',
 
-  // ✅ NEW PROJECT
+  // ✅ NEW PROJECTS
   'troy-fire',
+  'general-inspection',
 ];
 
 // Custom display names for projects
 const projectDisplayNames = {
   '66': 'Enterprises 66, LLC',
-  'baca': 'Baca',
-  'bayshore': 'Bay Shore Equipment',
+  baca: 'Baca',
+  bayshore: 'Bay Shore Equipment',
   'd-and-c': 'D & C',
   'find-your-fitness': 'Find Your Fitness',
   'sweet-roast': 'Sweet Roast',
   'f-up': 'F-Up',
-  'ioc': 'IOC',
-  'michigan': 'Michigan',
-  'mike': 'Mike',
-  'moher': 'Moher',
-  'mugzle': 'Mugzle',
-  'soldner': 'Soldner',
-  'sunshine': 'Sunshine',
+  ioc: 'IOC',
+  michigan: 'Michigan',
+  mike: 'Mike',
+  moher: 'Moher',
+  mugzle: 'Mugzle',
+  soldner: 'Soldner',
+  sunshine: 'Sunshine',
   'total-stone': 'Total Stone',
-  'trios': 'Trios',
-  'vpcs': 'VPCS',
-  'yale': 'Yale',
+  trios: 'Trios',
+  vpcs: 'VPCS',
+  yale: 'Yale',
   'castle-rock': 'Castle Rock',
   'solid-oak': 'Solid Oak',
 
-  // ✅ NEW DISPLAY NAME
+  // ✅ NEW DISPLAY NAMES
   'troy-fire': 'Troy Fire',
+  'general-inspection': 'General Inspection',
 };
 
 // Project card component with hover state
@@ -76,9 +77,7 @@ function ProjectCard({ project, displayName }) {
           src={`/portfolio/${project}/thumbnail.png`}
           alt={displayName}
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out"
-          style={{
-            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-          }}
+          style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />
       </div>
 
@@ -86,14 +85,14 @@ function ProjectCard({ project, displayName }) {
       <div
         className="absolute inset-0 flex items-center justify-center transition-all duration-300"
         style={{
-          backgroundColor: isHovered ? 'rgba(38, 188, 171, 0.8)' : 'rgba(38, 188, 171, 0)',
+          backgroundColor: isHovered
+            ? 'rgba(38, 188, 171, 0.8)'
+            : 'rgba(38, 188, 171, 0)',
         }}
       >
         <h3
           className="text-white text-xl md:text-2xl font-bold px-4 text-center transition-opacity duration-300"
-          style={{
-            opacity: isHovered ? 1 : 0,
-          }}
+          style={{ opacity: isHovered ? 1 : 0 }}
         >
           {displayName}
         </h3>
@@ -120,11 +119,16 @@ export default function Portfolio() {
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
 
-            return <ProjectCard key={project} project={project} displayName={displayName} />;
+            return (
+              <ProjectCard
+                key={project}
+                project={project}
+                displayName={displayName}
+              />
+            );
           })}
         </div>
       </div>
     </main>
   );
 }
-// force redeploy - portfolio update
