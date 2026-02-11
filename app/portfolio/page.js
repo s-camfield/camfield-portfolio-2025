@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '../components/Navigation';
+import Navigation from '../../components/Navigation';
 
 // ✅ Add / remove slugs here (folder names inside /public/portfolio/<slug>/thumbnail.png)
 const projects = [
